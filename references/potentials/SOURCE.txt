@@ -1,0 +1,9 @@
+Zope & Mishin, Phys. Rev. B 68, 024102 (2003): Ti-Al EAM
+NIST Interatomic Potentials Repository, LAMMPS eam/alloy conversion (C. Becker 2009)
+https://www.ctcms.nist.gov/potentials/Download/2003--Zope-R-R-Mishin-Y--Ti-Al/2/Zope-Ti-Al-2003.eam.alloy
+Downloaded 2026-11-10
+Al-Zr 2NN-MEAM: Fereidonnejad, Moghaddam, Moaddeli, Comput. Mater. Sci. 213, 111685 (2022)
+files: https://www.ctcms.nist.gov/potentials/Download/2022--Fereidonnejad-R-Moghaddam-A-O-Moaddeli-M--Al-Zr/1/
+NIST LAMMPS-computed reference properties: nist_AlZr_meam/ (from https://www.ctcms.nist.gov/potentials/entry/2022--Fereidonnejad-R-Moghaddam-A-O-Moaddeli-M--Al-Zr/2022--Fereidonnejad-R--Al-Zr--LAMMPS--ipr1)
+Al-Sc 2NN-MEAM: Mahata, Comput. Mater. Sci. 264, 114443 (2026) — file comments indicate unfinished cross-parameters; not used
+Downloaded 2026-11-10

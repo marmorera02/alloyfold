@@ -1,0 +1,174 @@
+#------------------------------------------------------------------------------
+#$Date: 2021-04-22 20:34:01 +0300 (Thu, 22 Apr 2021) $
+#$Revision: 264423 $
+#$URL: file:///home/coder/svn-repositories/_RELOADED_COD/cod-reloaded/cif/9/01/64/9016493.cif $
+#------------------------------------------------------------------------------
+#
+# This file is available in the Crystallography Open Database (COD),
+# http://www.crystallography.net/. The original data for this entry
+# were provided the American Mineralogist Crystal Structure Database,
+# http://rruff.geo.arizona.edu/AMS/amcsd.php
+#
+# The file may be used within the scientific community so long as
+# proper attribution is given to the journal article from which the
+# data were obtained.
+#
+data_9016493
+loop_
+_publ_author_name
+'Ondrus, P.'
+'Veselovsky, F.'
+'Gabasova, A.'
+'Hlousek, J.'
+'Srein, V.'
+'Vavrnn, I.'
+'Skala, R.'
+'Sejkora, J.'
+'Drabek, M.'
+_publ_section_title
+;
+ Primary minerals of the Jachymov ore district
+ Sample J1215P
+;
+_journal_name_full               'Journal of the Czech Geological Society'
+_journal_page_first              19
+_journal_page_last               147
+_journal_volume                  48
+_journal_year                    2003
+_chemical_compound_source        'Jachymov, Bohemia, Czech Republic'
+_chemical_formula_sum            'Fe0.11 S0.99 Zn0.9'
+_chemical_name_mineral           Sphalerite
+_space_group_IT_number           216
+_symmetry_space_group_name_Hall  'F -4 2 3'
+_symmetry_space_group_name_H-M   'F -4 3 m'
+_cell_angle_alpha                90
+_cell_angle_beta                 90
+_cell_angle_gamma                90
+_cell_formula_units_Z            4
+_cell_length_a                   5.4174
+_cell_length_b                   5.4174
+_cell_length_c                   5.4174
+_cell_volume                     158.991
+_database_code_amcsd             0017595
+_exptl_crystal_density_diffrn    4.041
+_cod_depositor_comments
+;
+ Added the _cell_formula_units_Z data item.
+
+ Antanas Vaitkus,
+ 2021-04-22
+;
+_cod_original_formula_sum        'Zn.9 Fe.11 S.99'
+_cod_database_code               9016493
+loop_
+_space_group_symop_operation_xyz
+x,y,z
+x,1/2+y,1/2+z
+1/2+x,y,1/2+z
+1/2+x,1/2+y,z
+-z,x,-y
+-z,1/2+x,1/2-y
+1/2-z,x,1/2-y
+1/2-z,1/2+x,-y
+-y,z,-x
+-y,1/2+z,1/2-x
+1/2-y,z,1/2-x
+1/2-y,1/2+z,-x
+-x,y,-z
+-x,1/2+y,1/2-z
+1/2-x,y,1/2-z
+1/2-x,1/2+y,-z
+x,-z,-y
+x,1/2-z,1/2-y
+1/2+x,-z,1/2-y
+1/2+x,1/2-z,-y
+z,-y,-x
+z,1/2-y,1/2-x
+1/2+z,-y,1/2-x
+1/2+z,1/2-y,-x
+y,-x,-z
+y,1/2-x,1/2-z
+1/2+y,-x,1/2-z
+1/2+y,1/2-x,-z
+x,z,y
+x,1/2+z,1/2+y
+1/2+x,z,1/2+y
+1/2+x,1/2+z,y
+z,y,x
+z,1/2+y,1/2+x
+1/2+z,y,1/2+x
+1/2+z,1/2+y,x
+y,x,z
+y,1/2+x,1/2+z
+1/2+y,x,1/2+z
+1/2+y,1/2+x,z
+-z,-x,y
+-z,1/2-x,1/2+y
+1/2-z,-x,1/2+y
+1/2-z,1/2-x,y
+-y,-z,x
+-y,1/2-z,1/2+x
+1/2-y,-z,1/2+x
+1/2-y,1/2-z,x
+-x,-y,z
+-x,1/2-y,1/2+z
+1/2-x,-y,1/2+z
+1/2-x,1/2-y,z
+z,-x,-y
+z,1/2-x,1/2-y
+1/2+z,-x,1/2-y
+1/2+z,1/2-x,-y
+y,-z,-x
+y,1/2-z,1/2-x
+1/2+y,-z,1/2-x
+1/2+y,1/2-z,-x
+x,-y,-z
+x,1/2-y,1/2-z
+1/2+x,-y,1/2-z
+1/2+x,1/2-y,-z
+-x,z,-y
+-x,1/2+z,1/2-y
+1/2-x,z,1/2-y
+1/2-x,1/2+z,-y
+-z,y,-x
+-z,1/2+y,1/2-x
+1/2-z,y,1/2-x
+1/2-z,1/2+y,-x
+-y,x,-z
+-y,1/2+x,1/2-z
+1/2-y,x,1/2-z
+1/2-y,1/2+x,-z
+-x,-z,y
+-x,1/2-z,1/2+y
+1/2-x,-z,1/2+y
+1/2-x,1/2-z,y
+-z,-y,x
+-z,1/2-y,1/2+x
+1/2-z,-y,1/2+x
+1/2-z,1/2-y,x
+-y,-x,z
+-y,1/2-x,1/2+z
+1/2-y,-x,1/2+z
+1/2-y,1/2-x,z
+z,x,y
+z,1/2+x,1/2+y
+1/2+z,x,1/2+y
+1/2+z,1/2+x,y
+y,z,x
+y,1/2+z,1/2+x
+1/2+y,z,1/2+x
+1/2+y,1/2+z,x
+loop_
+_atom_site_label
+_atom_site_fract_x
+_atom_site_fract_y
+_atom_site_fract_z
+_atom_site_occupancy
+Zn 0.00000 0.00000 0.00000 0.90000
+Fe 0.00000 0.00000 0.00000 0.11000
+S 0.25000 0.25000 0.25000 0.99000
+loop_
+_cod_related_entry_id
+_cod_related_entry_database
+_cod_related_entry_code
+1 AMCSD 0017595

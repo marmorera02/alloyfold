@@ -1,0 +1,23 @@
+[
+ {
+  "file": "5000168",
+  "sg": "P 1 21/a 1",
+  "a": "8.5526",
+  "b": "6.0158",
+  "c": "11.172",
+  "alpha": "90",
+  "beta": "124.596",
+  "gamma": "90",
+  "celltemp": "",
+  "diffrtemp": "",
+  "cellpressure": "",
+  "diffrpressure": "",
+  "Z": "2",
+  "Zprime": "0.5",
+  "commonname": "",
+  "title": "Temperature dependence of thermal motion in crystalline anthracene",
+  "authors": "Brock, C. P.; Dunitz, J. D.",
+  "year": "1990",
+  "doi": "10.1107/S0108768190008382"
+ }
+]

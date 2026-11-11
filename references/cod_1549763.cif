@@ -1,0 +1,96 @@
+#------------------------------------------------------------------------------
+#$Date: 2018-08-03 06:21:22 +0300 (Fri, 03 Aug 2018) $
+#$Revision: 209378 $
+#$URL: file:///home/coder/svn-repositories/_RELOADED_COD/cod-reloaded/cif/1/54/97/1549763.cif $
+#------------------------------------------------------------------------------
+#
+# This file is available in the Crystallography Open Database (COD),
+# http://www.crystallography.net/
+#
+# All data on this site have been placed in the public domain by the
+# contributors.
+#
+data_1549763
+loop_
+_publ_author_name
+'Arima, H.'
+'Kida, Y.'
+'Mikouchi, T.'
+'Sugiyama, K.'
+_publ_section_title
+;
+ The location of Mn (MnO: 2.0 wt%) in fluorapatit from Lavra da Golconda,
+ near Governador Valadares, Minas Gerais, Brazil
+;
+_journal_name_full
+'Journal of Mineralogical and Petrological Sciences'
+_journal_page_first              119
+_journal_page_last               125
+_journal_volume                  113
+_journal_year                    2018
+_chemical_formula_sum            'Ca4.83 F Mn0.15 O12 P3 Sr0.02'
+_chemical_name_common            fluorapatite
+_chemical_name_mineral           fluorapatite
+_space_group_IT_number           176
+_space_group_name_H-M_alt        'P 63/m'
+_symmetry_space_group_name_Hall  '-P 6c'
+_symmetry_space_group_name_H-M   'P 63/m'
+_cell_angle_alpha                90
+_cell_angle_beta                 90
+_cell_angle_gamma                120
+_cell_formula_units_Z            2
+_cell_length_a                   9.384(2)
+_cell_length_b                   9.384(2)
+_cell_length_c                   6.8842(6)
+_cell_volume                     525.00(16)
+_cod_data_source_file            flourapatite.cif
+_cod_data_source_block           flourapatite
+_cod_original_formula_sum        'Ca4.83 Mn0.15 Sr0.02 P3 O12 F1'
+_cod_database_code               1549763
+loop_
+_space_group_symop_operation_xyz
+'x, y, z'
+'-x, -y, -z'
+'-y, x-y, z'
+'y, -x+y, -z'
+'-x+y, -x, z'
+'x-y, x, -z'
+'-x, -y, z+1/2'
+'x, y, -z+1/2'
+'y, -x+y, z+1/2'
+'-y, x-y, -z+1/2'
+'x-y, x, z+1/2'
+'-x+y, -x, -z+1/2'
+loop_
+_atom_site_label
+_atom_site_occupancy
+_atom_site_fract_x
+_atom_site_fract_y
+_atom_site_fract_z
+_atom_site_adp_type
+_atom_site_U_iso_or_equiv
+_atom_site_type_symbol
+Ca1 0.9280 0.666667 0.333333 0.00140(7) Uiso 0.01036(15) Ca
+Ca1 0.0720 0.666667 0.333333 0.00140(7) Uiso 0.01036(15) Mn
+Ca2 0.9950 -0.00723(5) 0.24138(5) 0.250000 Uiso 0.00897(15) Ca
+Ca2 0.0050 -0.00723(5) 0.24138(5) 0.250000 Uiso 0.00897(15) Sr
+P 1.0 0.36923(6) 0.39848(6) 0.250000 Uiso 0.00683(15) P
+O1 1.0 0.48583(17) 0.3275(2) 0.250000 Uiso 0.0117(3) O
+O2 1.0 0.46653(18) 0.58815(18) 0.250000 Uiso 0.0156(3) O
+O3 1.0 0.25736(12) 0.34122(16) 0.07041(17) Uiso 0.0165(3) O
+F 1.0 0.000000 0.000000 0.250000 Uiso 0.0209(5) F
+loop_
+_atom_site_aniso_label
+_atom_site_aniso_U_11
+_atom_site_aniso_U_22
+_atom_site_aniso_U_33
+_atom_site_aniso_U_12
+_atom_site_aniso_U_13
+_atom_site_aniso_U_23
+Ca1 0.0117(17) 0.0117(17) 0.0077(2) 0.00585(8) 0.00000 0.00000
+Ca2 0.0089(2) 0.0098(2) 0.0084(2) 0.00482(14) 0.00000 0.00000
+P 0.0064(2) 0.0069(2) 0.0075(2) 0.00360(17) 0.00000 0.00000
+O1 0.0114(6) 0.0149(7) 0.0131(7) 0.0098(5) 0.00000 0.00000
+O2 0.0104(6) 0.0074(6) 0.0278(9) 0.0036(5) 0.00000 0.00000
+O3 0.0137(5) 0.0286(6) 0.0106(5) 0.0131(4) -0.0044(4) -0.0081(4)
+F 0.0121(6) 0.0121(6) 0.0386(15) 0.0061(3) 0.00000 0.00000

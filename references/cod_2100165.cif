@@ -1,0 +1,246 @@
+#------------------------------------------------------------------------------
+#$Date: 2025-08-19 13:01:59 +0300 (Tue, 19 Aug 2025) $
+#$Revision: 301802 $
+#$URL: file:///home/coder/svn-repositories/_RELOADED_COD/cod-reloaded/cif/2/10/01/2100165.cif $
+#------------------------------------------------------------------------------
+#
+# This file is available in the Crystallography Open Database (COD),
+# http://www.crystallography.net/. The original data for this entry
+# were provided by IUCr Journals, http://journals.iucr.org/.
+#
+# The file may be used within the scientific community so long as
+# proper attribution is given to the journal article from which the
+# data were obtained.
+#
+data_2100165
+loop_
+_publ_author_name
+'Day, G. M.'
+'Motherwell, W. D. S.'
+'Ammon, H. L.'
+'Boerrigter, S. X. M.'
+'Della Valle, R. G.'
+'Venuti, E.'
+'Dzyabchenko, A.'
+'Dunitz, J. D.'
+'Schweizer, B.'
+'van Eijck, B. P.'
+'Erk, P.'
+'Facelli, J. C.'
+'Bazterra, V. E.'
+'Ferraro, M. B.'
+'Hofmann, D. W. M.'
+'Leusen, F. J. J.'
+'Liang, C.'
+'Pantelides, C. C.'
+'Karamertzanis, P. G.'
+'Price, S. L.'
+'Lewis, T. C.'
+'Nowell, H.'
+'Torrisi, A.'
+'Scheraga, H. A.'
+'Arnautova, Y. A.'
+'Schmidt, M. U.'
+'Verwer, P.'
+_publ_section_title
+;
+ A third blind test of crystal structure prediction
+;
+_journal_coeditor_code           DE5014
+_journal_issue                   5
+_journal_name_full               'Acta Crystallographica Section B'
+_journal_page_first              511
+_journal_page_last               527
+_journal_paper_doi               10.1107/S0108768105016563
+_journal_volume                  61
+_journal_year                    2005
+_chemical_formula_moiety         ' C9 H9 N3 O5 '
+_chemical_formula_sum            'C9 H9 N3 O5'
+_chemical_formula_weight         239.19
+_space_group_IT_number           14
+_symmetry_cell_setting           monoclinic
+_symmetry_space_group_name_Hall  '-P 2yn'
+_symmetry_space_group_name_H-M   'P 1 21/n 1'
+_audit_creation_method           CRYSTALS_ver_12-03-99
+_cell_angle_alpha                90
+_cell_angle_beta                 99.1624(15)
+_cell_angle_gamma                90
+_cell_formula_units_Z            4
+_cell_length_a                   12.5693(4)
+_cell_length_b                   4.85310(10)
+_cell_length_c                   17.2663(5)
+_cell_measurement_reflns_used    2364
+_cell_measurement_temperature    150
+_cell_measurement_theta_max      27
+_cell_measurement_theta_min      5
+_cell_volume                     1039.81(5)
+_computing_cell_refinement
+;
+ Denzo/Scalepack (Otwinowski & Minor, 1996)
+;
+_computing_data_collection
+;
+ COLLECT (Nonius BV, 1997)
+;
+_computing_data_reduction
+;
+ Denzo/Scalepack (Otwinowski & Minor, 1996)
+;
+_computing_structure_solution
+;
+ SIR92 (Altomare et al, 1994)
+;
+_diffrn_ambient_temperature      150
+_diffrn_measured_fraction_theta_full 0.988
+_diffrn_measured_fraction_theta_max 0.987
+_diffrn_measurement_device_type
+;
+Nonius Kappa CCD
+;
+_diffrn_measurement_method       \w
+_diffrn_radiation_monochromator  graphite
+_diffrn_radiation_type           'Mo K\a'
+_diffrn_radiation_wavelength     0.71073
+_diffrn_reflns_av_R_equivalents  0.04
+_diffrn_reflns_limit_h_max       16
+_diffrn_reflns_limit_h_min       -16
+_diffrn_reflns_limit_k_max       5
+_diffrn_reflns_limit_k_min       -6
+_diffrn_reflns_limit_l_max       22
+_diffrn_reflns_limit_l_min       -22
+_diffrn_reflns_number            4326
+_diffrn_reflns_theta_full        26.915
+_diffrn_reflns_theta_max         27.465
+_diffrn_reflns_theta_min         5.227
+_diffrn_standards_decay_%        0.00
+_diffrn_standards_interval_count 0
+_diffrn_standards_interval_time  0
+_diffrn_standards_number         0
+_exptl_absorpt_coefficient_mu    0.127
+_exptl_absorpt_correction_T_max  0.99
+_exptl_absorpt_correction_T_min  0.98
+_exptl_absorpt_correction_type   multi-scan
+_exptl_absorpt_process_details
+;
+ Denzo/Scalepack (Otwinowski & Minor, 1996)
+;
+_exptl_crystal_colour            ' pale yellow '
+_exptl_crystal_density_diffrn    1.528
+_exptl_crystal_description       ' plate '
+_exptl_crystal_F_000             496.000
+_exptl_crystal_size_max          0.83
+_exptl_crystal_size_mid          0.15
+_exptl_crystal_size_min          0.04
+_refine_diff_density_max         0.19
+_refine_diff_density_min         -0.24
+_refine_ls_goodness_of_fit_ref   1.0388
+_refine_ls_number_parameters     181
+_refine_ls_number_reflns         1497
+_refine_ls_number_restraints     20
+_refine_ls_R_factor_all          0.0424
+_refine_ls_R_factor_gt           0.0317
+_refine_ls_shift/su_max          0.000200
+_refine_ls_structure_factor_coef Fsqd
+_refine_ls_weighting_details
+;
+ p=P(6)*max(Fo^2,0) + (1-P(6))Fc^2
+ Method = SHELXL 97 (Sheldrick, 1997)
+ W = 1. / [Sigma^2(F*)+(P(1)p)^2+P(2)p+P(4)+P(5)Sin(theta) ]
+ P(i) are:
+ 0.328E-01 0.500 0.00 0.00 0.00 0.333
+;
+_refine_ls_weighting_scheme      calc
+_refine_ls_wR_factor_all         0.0837
+_refine_ls_wR_factor_gt          0.0780
+_refine_ls_wR_factor_ref         0.0780
+_reflns_number_gt                1497
+_reflns_number_total             2357
+_reflns_threshold_expression     I>3.00u(I)
+_cod_data_source_file            de5014sup1.cif
+_cod_data_source_block           X
+_cod_depositor_comments
+;
+The following automatic conversions were performed:
+
+'_symmetry_cell_setting' value 'Monoclinic' changed to 'monoclinic'
+according to /home/saulius/struct/CIF-dictionaries/cif_core.dic
+dictionary named 'cif_core.dic' version 2.4.2 from 2011-04-26.
+
+Automatic conversion script
+Id: cif_fix_values 2935 2014-11-11 08:27:57Z andrius 
+;
+_cod_original_sg_symbol_H-M      'P 1 21/n 1 '
+_cod_original_formula_sum        ' C9 H9 N3 O5 '
+_cod_database_code               2100165
+loop_
+_symmetry_equiv_pos_as_xyz
+x,y,z
+-x,-y,-z
+-x+1/2,y+1/2,-z+1/2
+x+1/2,-y+1/2,z+1/2
+loop_
+_atom_site_label
+_atom_site_fract_x
+_atom_site_fract_y
+_atom_site_fract_z
+_atom_site_U_iso_or_equiv
+_atom_site_adp_type
+_atom_site_refinement_flags
+_atom_site_occupancy
+_atom_site_type_symbol
+C1 -0.11496(12) 0.5270(3) 0.17561(9) 0.0172 Uani . 1.0000 C
+C2 -0.07824(12) 0.4022(3) 0.11197(9) 0.0181 Uani . 1.0000 C
+C3 0.00456(13) 0.2130(3) 0.12495(9) 0.0197 Uani D 1.0000 C
+C4 0.05357(12) 0.1464(3) 0.20089(9) 0.0189 Uani D 1.0000 C
+C5 0.01682(12) 0.2781(3) 0.26387(9) 0.0179 Uani . 1.0000 C
+C6 -0.06717(12) 0.4686(3) 0.25078(9) 0.0177 Uani D 1.0000 C
+N7 0.06285(11) 0.2111(3) 0.34129(8) 0.0196 Uani . 1.0000 N
+C8 0.08511(13) 0.3976(3) 0.40076(9) 0.0207 Uani D 1.0000 C
+O9 0.07502(11) 0.6454(2) 0.38929(7) 0.0315 Uani . 1.0000 O
+C10 0.12185(16) 0.2782(4) 0.48050(10) 0.0280 Uani D 1.0000 C
+C11 0.14477(14) -0.0572(4) 0.21298(11) 0.0247 Uani D 1.0000 C
+N12 -0.11871(11) 0.4842(3) 0.03132(8) 0.0213 Uani . 1.0000 N
+O13 -0.10810(10) 0.3211(3) -0.02156(6) 0.0286 Uani . 1.0000 O
+O14 -0.15780(10) 0.7153(3) 0.02015(7) 0.0292 Uani . 1.0000 O
+N15 -0.21150(10) 0.7036(3) 0.16574(7) 0.0190 Uani . 1.0000 N
+O16 -0.20322(9) 0.9277(2) 0.19842(7) 0.0280 Uani . 1.0000 O
+O17 -0.29431(9) 0.6110(3) 0.12827(7) 0.0293 Uani . 1.0000 O
+H71 0.0734(14) 0.043(4) 0.3520(10) 0.0230 Uiso . 1.0000 H
+H31 0.0311(14) 0.139(4) 0.0820(10) 0.0243 Uiso D 1.0000 H
+H61 -0.0945(13) 0.549(4) 0.2930(10) 0.0216 Uiso D 1.0000 H
+H3 0.1465(17) 0.094(4) 0.4771(12) 0.0500 Uiso D 1.0000 H
+H4 0.0586(17) 0.275(5) 0.5083(12) 0.0500 Uiso D 1.0000 H
+H5 0.1722(16) 0.396(5) 0.5107(12) 0.0500 Uiso D 1.0000 H
+H6 0.1770(16) -0.080(5) 0.1689(12) 0.0500 Uiso D 1.0000 H
+H7 0.2017(16) 0.002(5) 0.2541(12) 0.0500 Uiso D 1.0000 H
+H8 0.1243(17) -0.229(4) 0.2314(12) 0.0500 Uiso D 1.0000 H
+loop_
+_atom_site_aniso_label
+_atom_site_aniso_U_11
+_atom_site_aniso_U_22
+_atom_site_aniso_U_33
+_atom_site_aniso_U_12
+_atom_site_aniso_U_13
+_atom_site_aniso_U_23
+C1 0.0162(7) 0.0138(8) 0.0222(8) -0.0014(6) 0.0048(6) -0.0002(6)
+C2 0.0201(8) 0.0170(8) 0.0177(8) -0.0026(7) 0.0047(6) 0.0009(6)
+C3 0.0223(8) 0.0162(8) 0.0224(8) -0.0016(7) 0.0088(7) -0.0018(7)
+C4 0.0188(8) 0.0136(8) 0.0247(8) -0.0026(6) 0.0049(6) -0.0004(6)
+C5 0.0197(8) 0.0135(8) 0.0205(8) -0.0038(6) 0.0032(6) 0.0004(6)
+C6 0.0186(8) 0.0160(8) 0.0195(8) -0.0026(6) 0.0059(6) -0.0010(7)
+N7 0.0249(7) 0.0118(7) 0.0212(7) 0.0012(6) 0.0010(5) 0.0019(6)
+C8 0.0216(8) 0.0169(9) 0.0235(8) 0.0003(7) 0.0028(6) -0.0001(7)
+O9 0.0478(8) 0.0149(6) 0.0286(7) 0.0008(6) -0.0038(6) 0.0005(5)
+C10 0.0360(10) 0.0220(10) 0.0236(9) 0.0028(8) -0.0020(8) 0.0008(7)
+C11 0.0235(9) 0.0209(9) 0.0301(9) 0.0030(7) 0.0061(7) 0.0007(8)
+N12 0.0226(7) 0.0216(8) 0.0207(7) -0.0002(6) 0.0068(5) 0.0017(6)
+O13 0.0369(7) 0.0296(7) 0.0202(6) 0.0001(6) 0.0072(5) -0.0065(5)
+O14 0.0372(7) 0.0248(7) 0.0266(6) 0.0085(6) 0.0080(5) 0.0061(5)
+N15 0.0196(7) 0.0194(7) 0.0189(6) 0.0014(6) 0.0057(5) 0.0015(6)
+O16 0.0261(6) 0.0173(6) 0.0418(7) 0.0017(5) 0.0089(5) -0.0055(5)
+O17 0.0202(6) 0.0394(8) 0.0265(6) 0.0007(6) -0.0024(5) -0.0071(6)
+loop_
+_cod_related_entry_id
+_cod_related_entry_database
+_cod_related_entry_code
+1 PubChem 3460084

@@ -1,0 +1,262 @@
+{
+ "label": "uncalibrated MMFF94",
+ "reference": "DMC, Della Pia et al. arXiv:2402.13059",
+ "selection": {
+  "cyclohexanedione": {
+   "cod": "x23",
+   "source": "MolCrys-MACE X23 POSCAR"
+  },
+  "acetic_acid": {
+   "cod": "x23",
+   "source": "MolCrys-MACE X23 POSCAR"
+  },
+  "adamantane": {
+   "cod": "x23",
+   "source": "MolCrys-MACE X23 POSCAR"
+  },
+  "ammonia": {
+   "cod": "x23",
+   "source": "MolCrys-MACE X23 POSCAR"
+  },
+  "anthracene": {
+   "cod": "x23",
+   "source": "MolCrys-MACE X23 POSCAR"
+  },
+  "benzene": {
+   "cod": "x23",
+   "source": "MolCrys-MACE X23 POSCAR"
+  },
+  "CO2": {
+   "cod": "x23",
+   "source": "MolCrys-MACE X23 POSCAR"
+  },
+  "cyanamide": {
+   "cod": "x23",
+   "source": "MolCrys-MACE X23 POSCAR"
+  },
+  "cytosine": {
+   "cod": "x23",
+   "source": "MolCrys-MACE X23 POSCAR"
+  },
+  "ethylcarbamate": {
+   "cod": "x23",
+   "source": "MolCrys-MACE X23 POSCAR"
+  },
+  "formamide": {
+   "cod": "x23",
+   "source": "MolCrys-MACE X23 POSCAR"
+  },
+  "imidazole": {
+   "cod": "x23",
+   "source": "MolCrys-MACE X23 POSCAR"
+  },
+  "naphthalene": {
+   "cod": "x23",
+   "source": "MolCrys-MACE X23 POSCAR"
+  },
+  "oxalic_alpha": {
+   "cod": "x23",
+   "source": "MolCrys-MACE X23 POSCAR"
+  },
+  "oxalic_beta": {
+   "cod": "x23",
+   "source": "MolCrys-MACE X23 POSCAR"
+  },
+  "pyrazine": {
+   "cod": "x23",
+   "source": "MolCrys-MACE X23 POSCAR"
+  },
+  "pyrazole": {
+   "cod": "x23",
+   "source": "MolCrys-MACE X23 POSCAR"
+  },
+  "triazine": {
+   "cod": "x23",
+   "source": "MolCrys-MACE X23 POSCAR"
+  },
+  "trioxane": {
+   "cod": "x23",
+   "source": "MolCrys-MACE X23 POSCAR"
+  },
+  "uracil": {
+   "cod": "x23",
+   "source": "MolCrys-MACE X23 POSCAR"
+  },
+  "urea": {
+   "cod": "x23",
+   "source": "MolCrys-MACE X23 POSCAR"
+  },
+  "hexamine": {
+   "cod": "x23",
+   "source": "MolCrys-MACE X23 POSCAR"
+  },
+  "succinic_acid": {
+   "cod": "x23",
+   "source": "MolCrys-MACE X23 POSCAR"
+  }
+ },
+ "results": {
+  "cyclohexanedione": {
+   "E": -66.4985011121022,
+   "V_exp": 139.7750246550001,
+   "V_min": 153.72692560619092,
+   "z": 2,
+   "sg": "P2_1 (4)"
+  },
+  "acetic_acid": {
+   "E": -65.03849044576815,
+   "V_exp": 74.3173728065,
+   "V_min": 76.58669928463723,
+   "z": 4,
+   "sg": "Pna2_1 (33)"
+  },
+  "adamantane": {
+   "E": -49.941012982366324,
+   "V_exp": 196.536315339,
+   "V_min": 204.4420745095199,
+   "z": 2,
+   "sg": "P-42_1c (114)"
+  },
+  "ammonia": {
+   "E": -36.62963806689452,
+   "V_exp": 33.76129404940624,
+   "V_min": 28.463709258728596,
+   "z": 4,
+   "sg": "P2_13 (198)"
+  },
+  "anthracene": {
+   "E": -81.93791803401318,
+   "V_exp": 228.23460945627127,
+   "V_min": 260.4844705882129,
+   "z": 2,
+   "sg": "P2_1/c (14)"
+  },
+  "benzene": {
+   "E": -39.00916126709933,
+   "V_exp": 118.51749449999998,
+   "V_min": 135.0723071258257,
+   "z": 4,
+   "sg": "Pbca (61)"
+  },
+  "CO2": {
+   "E": -28.196582587260206,
+   "V_exp": 44.47090265600001,
+   "V_min": 42.66675553157042,
+   "z": 4,
+   "sg": "Pa-3 (205)"
+  },
+  "cyanamide": {
+   "E": -54.05021011275756,
+   "V_exp": 51.95675281199997,
+   "V_min": 61.01295378786201,
+   "z": 8,
+   "sg": "Pbca (61)"
+  },
+  "cytosine": {
+   "E": -116.10539910683097,
+   "V_exp": 118.10606318399996,
+   "V_min": 128.58617091900967,
+   "z": 4,
+   "sg": "P2_12_12_1 (19)"
+  },
+  "ethylcarbamate": {
+   "E": -65.59132722425718,
+   "V_exp": 124.38661585295254,
+   "V_min": 124.72790744965985,
+   "z": 8,
+   "sg": "P-1 (2)"
+  },
+  "formamide": {
+   "E": -63.399693254494615,
+   "V_exp": 56.018658744080014,
+   "V_min": 56.264042169742766,
+   "z": 8,
+   "sg": "P2_1/c (14)"
+  },
+  "imidazole": {
+   "E": -74.40883448352992,
+   "V_exp": 87.18960853349006,
+   "V_min": 97.75881154379957,
+   "z": 8,
+   "sg": "P2_1/c (14)"
+  },
+  "naphthalene": {
+   "E": -58.87799150201616,
+   "V_exp": 170.415409721875,
+   "V_min": 197.2123247007522,
+   "z": 4,
+   "sg": "P2_1/c (14)"
+  },
+  "oxalic_alpha": {
+   "E": -112.02413657668058,
+   "V_exp": 78.14806200800003,
+   "V_min": 82.88466572836685,
+   "z": 4,
+   "sg": "P2_1/c (14)"
+  },
+  "oxalic_beta": {
+   "E": -111.88290231586059,
+   "V_exp": 78.43290437775006,
+   "V_min": 79.82036359349623,
+   "z": 4,
+   "sg": "P2_1/c (14)"
+  },
+  "pyrazine": {
+   "E": -55.486374731114104,
+   "V_exp": 101.81990812500001,
+   "V_min": 113.0517482272791,
+   "z": 2,
+   "sg": "P2_1/c (14)"
+  },
+  "pyrazole": {
+   "E": -69.61373043656623,
+   "V_exp": 87.28341394499995,
+   "V_min": 101.0677699096658,
+   "z": 8,
+   "sg": "Pna2_1 (33)"
+  },
+  "triazine": {
+   "E": -47.51026217882881,
+   "V_exp": 97.80366326197499,
+   "V_min": 102.78619604994918,
+   "z": 12,
+   "sg": "R-3c (167)"
+  },
+  "trioxane": {
+   "E": -52.68059239417082,
+   "V_exp": 102.75745272319995,
+   "V_min": 111.49468007479197,
+   "z": 12,
+   "sg": "Cc (9)"
+  },
+  "uracil": {
+   "E": -96.59987162204912,
+   "V_exp": 115.84660986079987,
+   "V_min": 124.45572699371992,
+   "z": 32,
+   "sg": "P-1 (2)"
+  },
+  "urea": {
+   "E": -77.81533459891354,
+   "V_exp": 72.52992495000002,
+   "V_min": 64.27411344508943,
+   "z": 2,
+   "sg": "P2_12_12 (18)"
+  },
+  "hexamine": {
+   "E": -54.55635326687597,
+   "V_exp": 168.04327765817035,
+   "V_min": 180.55360552863564,
+   "z": 2,
+   "sg": "I-43m (217)"
+  },
+  "succinic_acid": {
+   "E": -84.10466187575142,
+   "V_exp": 121.95340320469892,
+   "V_min": 140.99858690039218,
+   "z": 2,
+   "sg": "P1 (1)"
+  }
+ },
+ "timestamp": "2026-11-10T09:37:51"
+}

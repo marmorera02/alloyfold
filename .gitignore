@@ -1,0 +1,7 @@
+# created when running
+db/
+dft_results/
+hunt_results/
+references/x23/
+__pycache__/
+*.pyc

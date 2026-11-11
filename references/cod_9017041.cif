@@ -1,0 +1,135 @@
+#------------------------------------------------------------------------------
+#$Date: 2024-08-03 13:19:43 +0300 (Sat, 03 Aug 2024) $
+#$Revision: 293658 $
+#$URL: file:///home/coder/svn-repositories/_RELOADED_COD/cod-reloaded/cif/9/01/70/9017041.cif $
+#------------------------------------------------------------------------------
+#
+# This file is available in the Crystallography Open Database (COD),
+# http://www.crystallography.net/. The original data for this entry
+# were provided the American Mineralogist Crystal Structure Database,
+# http://rruff.geo.arizona.edu/AMS/amcsd.php
+#
+# The file may be used within the scientific community so long as
+# proper attribution is given to the journal article from which the
+# data were obtained.
+#
+data_9017041
+loop_
+_publ_author_name
+'Hughes, J. M.'
+'Nekvasil, H.'
+'Ustunisik, G.'
+'Lindsley, D. H.'
+'Coraor, A. E.'
+'Vaughn, J.'
+'Phillips, B. L.'
+'McCubbin, F. M.'
+'Woerner, W. R.'
+_publ_section_title
+;
+ Solid solution in the fluorapatite-chlorapatite binary system: High-precision crystal
+ structure refinements of synthetic F-Cl apatite.
+ Note: Sample HNF5CL5-8
+;
+_journal_name_full               'American Mineralogist'
+_journal_page_first              369
+_journal_page_last               376
+_journal_volume                  99
+_journal_year                    2014
+_chemical_compound_source        Synthetic
+_chemical_formula_sum            'Ca5 Cl0.343 F0.766 O12 P3'
+_chemical_name_mineral           Fluorapatite
+_space_group_IT_number           176
+_space_group_name_Hall           '-P 6c'
+_space_group_name_H-M_alt        'P 63/m'
+_symmetry_space_group_name_H-M   'P 63/m'
+_cell_angle_alpha                90
+_cell_angle_beta                 90
+_cell_angle_gamma                120
+_cell_formula_units_Z            2
+_cell_length_a                   9.5101
+_cell_length_b                   9.5101
+_cell_length_c                   6.83000
+_cell_volume                     534.960
+_database_code_amcsd             0020114
+_exptl_crystal_density_diffrn    3.179
+_cod_data_source_file            inputs/fixed/downloads/05/05672.cif
+_cod_data_source_block           05672
+_cod_original_formula_sum        'Ca5 P3 O12 Cl.343 F.766'
+_cod_database_code               9017041
+loop_
+_space_group_symop_operation_xyz
+x,y,z
+-x+y,-x,1/2-z
+x-y,x,1/2+z
+y,-x+y,-z
+-y,x-y,z
+x,y,1/2-z
+-x,-y,1/2+z
+x-y,x,-z
+-x+y,-x,z
+-y,x-y,1/2-z
+y,-x+y,1/2+z
+-x,-y,-z
+loop_
+_atom_site_aniso_label
+_atom_site_aniso_U_11
+_atom_site_aniso_U_22
+_atom_site_aniso_U_33
+_atom_site_aniso_U_12
+_atom_site_aniso_U_13
+_atom_site_aniso_U_23
+Ca1 0.01578 0.01578 0.00861 0.00789 0.00000 0.00000
+Ca2 0.01366 0.02398 0.01123 0.00630 0.00000 0.00000
+P 0.00853 0.01141 0.00918 0.00489 0.00000 0.00000
+O1 0.00940 0.02150 0.01490 0.00750 0.00000 0.00000
+O2 0.01510 0.01200 0.02720 0.00430 0.00000 0.00000
+O3 0.01120 0.02480 0.01350 0.00820 -0.00130 0.00530
+O3* 0.01120 0.02480 0.01350 0.00820 -0.00130 0.00530
+loop_
+_atom_site_label
+_atom_site_fract_x
+_atom_site_fract_y
+_atom_site_fract_z
+_atom_site_occupancy
+_atom_site_U_iso_or_equiv
+_atom_site_type_symbol
+_atom_site_attached_hydrogens
+Ca1 0.66667 0.33333 -0.00218 1.00000 0.01339 Ca 0
+Ca2 0.00352 0.25495 0.25000 1.00000 0.01767 Ca 0
+P 0.96900 0.59804 0.25000 1.00000 0.00975 P 0
+O1 0.15326 0.66591 0.25000 1.00000 0.01538 O 0
+O2 0.87623 0.41101 0.25000 1.00000 0.01920 O 0
+O3 0.90700 0.64250 0.06290 0.66000 0.01690 O 0
+O3* 0.92930 0.67450 0.08230 0.34000 0.01690 O 0
+Cl 0.00000 0.00000 0.00000 0.08100 0.02500 Cl 0
+ClB 0.00000 0.00000 0.08650 0.13100 0.01390 Cl 0
+F 0.00000 0.00000 0.25000 0.40600 0.01500 F 0
+FB 0.00000 0.00000 0.16780 0.18000 0.00600 F 0
+loop_
+_cod_changelog_entry_id
+_cod_changelog_entry_author
+_cod_changelog_entry_date
+_cod_changelog_entry_text
+1
+;cod-tools version 3.8.0
+Id: cif_guess_AMCSD_atom_types 9581 2023-05-17 12:35:41Z saulius
+;
+2023-05-23T09:25:27+03:00
+;Derived atom types and hydrogen counts
+from atom names that follow the AMCSD naming convention
+(Wat == water, O-H == hydroxyl).
+;
+2
+;cod-tools version 3.10.1
+Id: cif_fix_AMCSD_aniso_labels 10200 2024-08-01 14:09:44Z saulius
+;
+2024-08-02T12:21:56+03:00
+;Changed the following '_atom_site_aniso_label' values:
+'O3'' -> 'O3*'
+;
+loop_
+_cod_related_entry_id
+_cod_related_entry_database
+_cod_related_entry_code
+1 AMCSD 0020114

@@ -1,0 +1,61 @@
+{
+  "scale": {
+    "eps": 1.4537108342487923,
+    "r": 0.9300517038752912,
+    "eps_x": 1.3776118376388313,
+    "r_x": 0.9779276622684315
+  },
+  "loss": 0.00542,
+  "training": {
+    "benzene form I": {
+      "density_ratio": 1.025,
+      "energy_ratio": 1.028,
+      "energy": -50.35
+    },
+    "naphthalene form I": {
+      "density_ratio": 0.971,
+      "energy_ratio": 0.983,
+      "energy": -75.68
+    },
+    "anthracene form I": {
+      "density_ratio": 0.997,
+      "energy_ratio": 0.992,
+      "energy": -104.12
+    },
+    "acetic_acid form I": {
+      "density_ratio": 1.029,
+      "energy_ratio": null,
+      "energy": -70.93
+    },
+    "aspirin form I": {
+      "density_ratio": 0.956,
+      "energy_ratio": 0.999,
+      "energy": -112.84
+    }
+  },
+  "validation": {
+    "form I": {
+      "density_ratio": 0.947,
+      "energy": -129.16,
+      "space_group": "P2_1 (4)"
+    },
+    "form II": {
+      "density_ratio": 0.959,
+      "energy": -119.43,
+      "space_group": "P2_12_12_1 (19)"
+    },
+    "form III": {
+      "density_ratio": 0.944,
+      "energy": -107.56,
+      "space_group": "P1 (1)"
+    }
+  },
+  "validation_energy_order": [
+    "form I",
+    "form II",
+    "form III"
+  ],
+  "validation_note": "experiment: paracetamol form I most stable",
+  "method": "COD experimental structures, rigid MMFF94 conformers, density (thermal-corrected) + lattice energy",
+  "fitted": "2026-11-10T09:34:21"
+}

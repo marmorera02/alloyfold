@@ -1,0 +1,11 @@
+numpy>=1.26
+scipy>=1.11
+torch>=2.2
+rdkit>=2024.3
+numba>=0.59
+ase>=3.23
+spglib>=2.1
+psutil>=5.9
+# optional, only for the DFT re-ranking (dft_rank.py):
+# pyscf>=2.6
+# simple-dftd3 (python module "dftd3"; easiest via conda-forge)

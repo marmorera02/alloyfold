@@ -1,0 +1,109 @@
+{
+ "cyclohexanedione": null,
+ "acetic_acid": {
+  "cod": 2008187,
+  "sg": "P n a 21",
+  "T": "40",
+  "year": "1999",
+  "name": "Ethanoic acid",
+  "method": "formula+sg+volume"
+ },
+ "adamantane": null,
+ "ammonia": {
+  "cod": 2310927,
+  "sg": "P 21 3",
+  "T": "",
+  "year": "1959",
+  "name": "N H3",
+  "method": "formula+sg+volume"
+ },
+ "anthracene": {
+  "cod": 4513302,
+  "sg": "P 1 21/c 1",
+  "T": "100",
+  "year": "2015",
+  "name": "",
+  "method": "formula+sg+volume"
+ },
+ "benzene": {
+  "cod": 2100348,
+  "sg": "P b c a",
+  "T": "296",
+  "year": "2006",
+  "name": "benzene",
+  "method": "formula+sg+volume"
+ },
+ "CO2": {
+  "cod": 9007643,
+  "sg": "P a -3",
+  "T": "150",
+  "year": "1980",
+  "name": "",
+  "method": "formula+sg+volume"
+ },
+ "cyanamide": null,
+ "cytosine": null,
+ "ethylcarbamate": null,
+ "formamide": null,
+ "imidazole": null,
+ "naphthalene": {
+  "cod": 2311090,
+  "sg": "P 1 21/c 1",
+  "T": "80",
+  "year": "2017",
+  "name": "",
+  "method": "formula+sg+volume"
+ },
+ "oxalic_alpha": {
+  "cod": 4116139,
+  "sg": "P b c a",
+  "T": "130",
+  "year": "2000",
+  "name": "Ethane-1,2-dioic acid",
+  "method": "formula+sg+volume"
+ },
+ "oxalic_beta": {
+  "cod": 4507987,
+  "sg": "P 1 21/c 1",
+  "T": "156",
+  "year": "2013",
+  "name": "Ethane-1,2-dioic acid",
+  "method": "formula+sg+volume"
+ },
+ "pyrazine": null,
+ "pyrazole": {
+  "cod": 1511994,
+  "sg": "P n a 21",
+  "T": "100",
+  "year": "2013",
+  "name": "pyrazole",
+  "method": "formula+sg+volume"
+ },
+ "triazine": null,
+ "trioxane": null,
+ "uracil": {
+  "cod": 7203098,
+  "sg": "P 1 21/c 1",
+  "T": "293",
+  "year": "2007",
+  "name": "Pyrazine-N,N'-dioxide",
+  "method": "formula+sg+volume"
+ },
+ "urea": {
+  "cod": 9017318,
+  "sg": "P -4 21 m",
+  "T": "12",
+  "year": "1984",
+  "name": "",
+  "method": "formula+sg+volume"
+ },
+ "hexamine": null,
+ "succinic_acid": {
+  "cod": 4507998,
+  "sg": "P 1 21/c 1",
+  "T": "120",
+  "year": "2013",
+  "name": "1,4-Butanedioic acid",
+  "method": "formula+sg+volume"
+ }
+}

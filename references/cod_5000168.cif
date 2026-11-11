@@ -1,0 +1,90 @@
+#------------------------------------------------------------------------------
+#$Date: 2016-02-13 14:50:18 +0200 (Sat, 13 Feb 2016) $
+#$Revision: 176428 $
+#$URL: file:///home/coder/svn-repositories/_RELOADED_COD/cod-reloaded/cif/5/00/01/5000168.cif $
+#------------------------------------------------------------------------------
+#
+# This file is available in the Crystallography Open Database (COD),
+# http://www.crystallography.net/
+#
+# All data on this site have been placed in the public domain by the
+# contributors.
+#
+data_5000168
+loop_
+_publ_author_name
+'Brock, C. P.'
+'Dunitz, J. D.'
+_publ_section_title
+;
+ Temperature dependence of thermal motion in crystalline anthracene
+;
+_journal_issue                   6
+_journal_name_full               'Acta Crystallographica Section B'
+_journal_page_first              795
+_journal_page_last               806
+_journal_paper_doi               10.1107/S0108768190008382
+_journal_volume                  46
+_journal_year                    1990
+_chemical_formula_moiety         'C14 H10'
+_chemical_formula_sum            'C14 H10'
+_chemical_name_systematic        Anthracene
+_space_group_IT_number           14
+_symmetry_cell_setting           monoclinic
+_symmetry_space_group_name_Hall  '-P 2yab'
+_symmetry_space_group_name_H-M   'P 1 21/a 1'
+_cell_angle_alpha                90
+_cell_angle_beta                 124.596(15)
+_cell_angle_gamma                90
+_cell_formula_units_Z            2
+_cell_length_a                   8.5526(12)
+_cell_length_b                   6.0158(11)
+_cell_length_c                   11.1720(16)
+_cell_volume                     473.168
+_diffrn_ambient_temperature      ?
+_refine_ls_R_factor_gt           4.4
+_refine_ls_wR_factor_gt          4.4
+_cod_original_sg_symbol_H-M      'P 21/a'
+_cod_database_code               5000168
+loop_
+_symmetry_equiv_pos_site_id
+_symmetry_equiv_pos_as_xyz
+1 x,y,z
+2 1/2-x,1/2+y,-z
+3 -x,-y,-z
+4 -1/2+x,-1/2-y,z
+loop_
+_atom_site_label
+_atom_site_type_symbol
+_atom_site_fract_x
+_atom_site_fract_y
+_atom_site_fract_z
+C1 C 0.0867(3) 0.0288(4) 0.3644(3)
+C2 C 0.1178(3) 0.1555(4) 0.2798(2)
+C3 C 0.0589(2) 0.0817(3) 0.1384(2)
+C4 C 0.0875(2) 0.2074(4) 0.0477(2)
+C5 C -0.0303(2) -0.1314(3) 0.0896(2)
+C6 C -0.0601(3) -0.2577(4) 0.1830(2)
+C7 C -0.0035(3) -0.1806(4) 0.3156(2)
+H1 H 0.127(3) 0.082(3) 0.459(2)
+H2 H 0.182(3) 0.297(4) 0.313(2)
+H3 H 0.151(3) 0.350(3) 0.082(2)
+H4 H -0.123(2) -0.405(3) 0.147(2)
+H5 H -0.027(3) -0.271(4) 0.380(2)
+C5B C 0.0303(2) 0.1314(3) -0.0896(2)
+C4B C -0.0875(2) -0.2074(4) -0.0477(2)
+C3B C -0.0589(2) -0.0817(3) -0.1384(2)
+C6B C 0.0601(3) 0.2577(4) -0.1830(2)
+H3B H -0.151(3) -0.350(3) -0.082(2)
+C2B C -0.1178(3) -0.1555(4) -0.2798(2)
+C7B C 0.0035(3) 0.1806(4) -0.3156(2)
+H4B H 0.123(2) 0.405(3) -0.147(2)
+C1B C -0.0867(3) -0.0288(4) -0.3644(3)
+H2B H -0.182(3) -0.297(4) -0.313(2)
+H5B H 0.027(3) 0.271(4) -0.380(2)
+H1B H -0.127(3) -0.082(3) -0.459(2)
+loop_
+_atom_type_symbol
+_atom_type_radius_bond
+C 0.68
+H 0.23

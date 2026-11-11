@@ -1,0 +1,90 @@
+#------------------------------------------------------------------------------
+#$Date: 2024-04-25 17:59:02 +0300 (Thu, 25 Apr 2024) $
+#$Revision: 291351 $
+#$URL: file:///home/coder/svn-repositories/_RELOADED_COD/cod-reloaded/cif/9/00/49/9004929.cif $
+#------------------------------------------------------------------------------
+#
+# This file is available in the Crystallography Open Database (COD),
+# http://www.crystallography.net/. The original data for this entry
+# were provided the American Mineralogist Crystal Structure Database,
+# http://rruff.geo.arizona.edu/AMS/amcsd.php
+#
+# The file may be used within the scientific community so long as
+# proper attribution is given to the journal article from which the
+# data were obtained.
+#
+data_9004929
+loop_
+_publ_author_name
+'Drits, V. A.'
+'McCarty, D. K.'
+'Sakharov, B.'
+'Milliken, K. L.'
+_publ_section_title
+;
+ New insight into structural and compositional
+ variability in some ancient excess-Ca dolomite
+ Sample: M236-116, Phase II
+;
+_journal_name_full               'The Canadian Mineralogist'
+_journal_page_first              1255
+_journal_page_last               1290
+_journal_paper_doi               10.2113/gscanmin.43.4.1255
+_journal_volume                  43
+_journal_year                    2005
+_chemical_compound_source        'Lea County, New Mexico, USA'
+_chemical_formula_sum            'C2 Ca1.17 Mg0.83 O6'
+_chemical_name_mineral           Dolomite
+_space_group_IT_number           148
+_symmetry_space_group_name_Hall  '-R 3'
+_symmetry_space_group_name_H-M   'R -3 :H'
+_cell_angle_alpha                90
+_cell_angle_beta                 90
+_cell_angle_gamma                120
+_cell_length_a                   4.8274
+_cell_length_b                   4.8274
+_cell_length_c                   16.1374
+_cell_formula_units_Z            3
+_cell_volume                     325.680
+_database_code_amcsd             0006027
+_exptl_crystal_density_diffrn    2.862
+_cod_original_sg_symbol_H-M      'R -3'
+_cod_original_formula_sum        'Ca1.17 Mg.83 C2 O6'
+_cod_database_code               9004929
+loop_
+_space_group_symop_operation_xyz
+x,y,z
+2/3+x,1/3+y,1/3+z
+1/3+x,2/3+y,2/3+z
+y,-x+y,-z
+2/3+y,1/3-x+y,1/3-z
+1/3+y,2/3-x+y,2/3-z
+-x+y,-x,z
+2/3-x+y,1/3-x,1/3+z
+1/3-x+y,2/3-x,2/3+z
+-x,-y,-z
+2/3-x,1/3-y,1/3-z
+1/3-x,2/3-y,2/3-z
+-y,x-y,z
+2/3-y,1/3+x-y,1/3+z
+1/3-y,2/3+x-y,2/3+z
+x-y,x,-z
+2/3+x-y,1/3+x,1/3-z
+1/3+x-y,2/3+x,2/3-z
+loop_
+_atom_site_label
+_atom_site_fract_x
+_atom_site_fract_y
+_atom_site_fract_z
+_atom_site_occupancy
+_atom_site_U_iso_or_equiv
+CaA 0.00000 0.00000 0.00000 1.00000 0.01127
+MgB 0.00000 0.00000 0.50000 0.83000 0.01241
+CaB 0.00000 0.00000 0.50000 0.17000 0.01241
+C 0.00000 0.00000 0.24380 1.00000 ?
+O 0.25050 -0.03380 0.24510 1.00000 0.01267
+loop_
+_cod_related_entry_id
+_cod_related_entry_database
+_cod_related_entry_code
+1 AMCSD 0006027

@@ -1,0 +1,67 @@
+
+#Al is first element and Sc second element
+
+rc = 4.5
+delr = 0.1
+augt1 = 0
+erose_form = 2
+ialloy = 2
+
+zbl(1,1) = 0
+nn2(1,1) = 1
+rho0(1) = 1.000
+Ec(1,1) = 3.360
+re(1,1) = 2.8600
+alpha(1,1) = 4.68559768
+repuls(1,1) = 0.05
+attrac(1,1) = 0.05
+Cmin(1,1,1) = 0.49
+Cmax(1,1,1) = 2.80
+
+Ec(2,2) = 3.89
+Cmax(2,2,2) = 2.8
+Cmin(2,2,2) = 2
+lattce(2,2) = hcp
+nn2(2,2) = 1
+attrac(2,2) = 0
+repuls(2,2) = 0
+zbl(2,2) =0
+alpha(2,2) = 4.49
+
+####Al-Sc , taken from Al-Mg, but this will definately need modification
+
+zbl(1,2) = 0
+nn2(1,2) = 1
+
+ # The L12 Al3Sc structure has 3 Al atoms and 1 Mg atom per 4 atoms. We may need some fitting its 0.75*Al_Ec+0.25*Sc_Ec-(-0.451)=3.9435eV/atom (Table one Asta) to start with
+
+Ec(1,2) = 3.9435 
+
+
+ # cube root of 17.24, L12 essentially fcc. Table 1 Asta paper experimental values 17.24-17.29
+ 
+re(1,2) = 2.951
+
+
+#### See alpha calculation from Asta et. al. alpha = sqrt(9*B*omega/Ec) [See Baskes Paper Eqn 3 , B = B: 0.99 Mbar = 0.99 * 0.6242 = 0.6180 eV/A^3 or 0.92*0.6242 = .57426, omega = 17.29 A^3, From Asta Table 1 , 1 Mbar = 0.6242 eV/A^3, alpha varies between 5.05 to 5.25. We will keep the alpha between those values, lets start with 5.15
+
+alpha(1,2) = 5.15 
+attrac(1,2) = 0.0375
+repuls(1,2) = 0.0375
+Cmin(1,1,2) = 0.49
+Cmin(2,2,1) = 0.49
+Cmin(1,2,1) = 0.36
+Cmin(1,2,2) = 0.36
+Cmin(2,1,1) = 0.36
+Cmin(2,1,2) = 0.36
+Cmax(1,1,2) = 2.8
+Cmax(2,2,1) = 2.8
+Cmax(1,2,1) = 2.8
+Cmax(1,2,2) = 2.8
+Cmax(2,1,1) = 2.8
+Cmax(2,1,2) = 2.8
+lattce(1,2) = 'l12'
+
+
+
+

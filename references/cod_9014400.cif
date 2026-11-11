@@ -1,0 +1,132 @@
+#------------------------------------------------------------------------------
+#$Date: 2023-05-10 20:44:19 +0300 (Wed, 10 May 2023) $
+#$Revision: 283658 $
+#$URL: file:///home/coder/svn-repositories/_RELOADED_COD/cod-reloaded/cif/9/01/44/9014400.cif $
+#------------------------------------------------------------------------------
+#
+# This file is available in the Crystallography Open Database (COD),
+# http://www.crystallography.net/. The original data for this entry
+# were provided the American Mineralogist Crystal Structure Database,
+# http://rruff.geo.arizona.edu/AMS/amcsd.php
+#
+# The file may be used within the scientific community so long as
+# proper attribution is given to the journal article from which the
+# data were obtained.
+#
+data_9014400
+loop_
+_publ_author_name
+'Adamo, I.'
+'Gatta, G. D.'
+'Rotiroti, N.'
+'Diella, V.'
+'Pavese, A.'
+_publ_section_title
+;
+ Gemmological investigation of a synthetic blue beryl: a multi-methodological study
+ Note: Sample: M2-1
+;
+_journal_name_full               'Mineralogical Magazine'
+_journal_page_first              799
+_journal_page_last               808
+_journal_paper_doi               10.1180/minmag.2008.072.3.799
+_journal_volume                  72
+_journal_year                    2008
+_chemical_compound_source        Synthetic
+_chemical_formula_sum
+'Al1.884 Be2.859 Cu0.141 Fe0.116 H0.88 Li0.12 O18.44 Si6'
+_chemical_name_mineral           Beryl
+_space_group_IT_number           192
+_symmetry_space_group_name_Hall  '-P 6 2c'
+_symmetry_space_group_name_H-M   'P 6/m c c'
+_cell_angle_alpha                90
+_cell_angle_beta                 90
+_cell_angle_gamma                120
+_cell_formula_units_Z            2
+_cell_length_a                   9.2502
+_cell_length_b                   9.2502
+_cell_length_c                   9.2184
+_cell_volume                     683.107
+_database_code_amcsd             0019164
+_exptl_crystal_density_diffrn    2.709
+_cod_original_formula_sum
+'(Be2.859 Cu.141) (Al1.884 Fe.116) Si6 O18.44 Li.12 H.88'
+_cod_database_code               9014400
+loop_
+_space_group_symop_operation_xyz
+x,y,z
+-x,-x+y,1/2+z
+x,x-y,1/2-z
+-x+y,-x,-z
+x-y,x,z
+-y,-x,1/2+z
+y,x,1/2-z
+y,-x+y,-z
+-y,x-y,z
+x-y,-y,1/2+z
+-x+y,y,1/2-z
+x,y,-z
+-x,-y,z
+x,x-y,1/2+z
+-x,-x+y,1/2-z
+x-y,x,-z
+-x+y,-x,z
+y,x,1/2+z
+-y,-x,1/2-z
+-y,x-y,-z
+y,-x+y,z
+-x+y,y,1/2+z
+x-y,-y,1/2-z
+-x,-y,-z
+loop_
+_atom_site_aniso_label
+_atom_site_aniso_U_11
+_atom_site_aniso_U_22
+_atom_site_aniso_U_33
+_atom_site_aniso_U_12
+_atom_site_aniso_U_13
+_atom_site_aniso_U_23
+Be 0.01260 0.00500 0.00600 0.00250 0.00000 0.00000
+Cu 0.01260 0.00500 0.00600 0.00250 0.00000 0.00000
+Al 0.00610 0.00610 0.00420 0.00310 0.00000 0.00000
+Fe 0.00610 0.00610 0.00420 0.00310 0.00000 0.00000
+Si 0.00600 0.00610 0.00540 0.00330 0.00000 0.00000
+O1 0.01200 0.01080 0.01900 0.00770 0.00000 0.00000
+O2 0.01280 0.01070 0.00940 0.00710 -0.00390 -0.00260
+loop_
+_atom_site_label
+_atom_site_fract_x
+_atom_site_fract_y
+_atom_site_fract_z
+_atom_site_occupancy
+_atom_site_U_iso_or_equiv
+_atom_site_type_symbol
+_atom_site_attached_hydrogens
+Be 0.50000 0.00000 0.25000 0.95300 0.00880 Be 0
+Cu 0.50000 0.00000 0.25000 0.04700 0.00880 Cu 0
+Al 0.66667 0.33333 0.25000 0.94200 0.00550 Al 0
+Fe 0.66667 0.33333 0.25000 0.05800 0.00550 Fe 0
+Si 0.38706 0.11623 0.00000 1.00000 0.00570 Si 0
+O1 0.30799 0.23577 0.00000 1.00000 0.01300 O 0
+O2 0.49789 0.14549 0.14496 1.00000 0.01040 O 0
+Wat 0.00000 0.00000 0.25000 0.44000 0.08000 O 2
+LiM 0.00000 0.00000 0.00000 0.12000 0.07000 Li 0
+loop_
+_cod_changelog_entry_id
+_cod_changelog_entry_author
+_cod_changelog_entry_date
+_cod_changelog_entry_text
+1
+;cod-tools version 3.8.0
+Id: cif_guess_AMCSD_atom_types 9574 2023-05-10 09:00:05Z saulius
+;
+2023-05-10T18:55:08+03:00
+;Derived atom types and hydrogen counts
+from atom names that follow the AMCSD naming convention
+(Wat == water, O-H == hydroxyl).
+;
+loop_
+_cod_related_entry_id
+_cod_related_entry_database
+_cod_related_entry_code
+1 AMCSD 0019164

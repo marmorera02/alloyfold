@@ -1,0 +1,91 @@
+#------------------------------------------------------------------------------
+#$Date: 2024-05-29 17:00:33 +0300 (Wed, 29 May 2024) $
+#$Revision: 292100 $
+#$URL: file:///home/coder/svn-repositories/_RELOADED_COD/cod-reloaded/cif/9/01/58/9015886.cif $
+#------------------------------------------------------------------------------
+#
+# This file is available in the Crystallography Open Database (COD),
+# http://www.crystallography.net/. The original data for this entry
+# were provided the American Mineralogist Crystal Structure Database,
+# http://rruff.geo.arizona.edu/AMS/amcsd.php
+#
+# The file may be used within the scientific community so long as
+# proper attribution is given to the journal article from which the
+# data were obtained.
+#
+data_9015886
+loop_
+_publ_author_name
+'Ye, Y.'
+'Smyth, J. R.'
+'Boni, P.'
+_publ_section_title
+;
+ Crystal structure and thermal expansion of aragonite-group carbonates
+ by single-crystal X-ray diffraction
+ Note: T = 527 K
+;
+_journal_name_full               'American Mineralogist'
+_journal_page_first              707
+_journal_page_last               712
+_journal_paper_doi               10.2138/am.2012.3923
+_journal_volume                  97
+_journal_year                    2012
+_chemical_compound_source        'natural, unknown locality'
+_chemical_formula_sum            'C Ca0.997 O3 Sr0.003'
+_chemical_name_mineral           Aragonite
+_space_group_IT_number           62
+_symmetry_space_group_name_Hall  '-P 2n 2a'
+_symmetry_space_group_name_H-M   'P m c n'
+_cell_angle_alpha                90
+_cell_angle_beta                 90
+_cell_angle_gamma                90
+_cell_length_a                   4.9723
+_cell_length_b                   7.9983
+_cell_length_c                   5.7931
+_cell_formula_units_Z            4
+_cell_volume                     230.391
+_database_code_amcsd             0018856
+_exptl_crystal_density_diffrn    2.890
+_cod_original_formula_sum        '(Ca.997 Sr.003) C O3'
+_cod_database_code               9015886
+loop_
+_space_group_symop_operation_xyz
+x,y,z
+1/2-x,y,z
+1/2+x,-y,-z
+1/2+x,1/2+y,1/2-z
+1/2-x,1/2-y,1/2+z
+x,1/2-y,1/2+z
+-x,1/2+y,1/2-z
+-x,-y,-z
+loop_
+_atom_site_aniso_label
+_atom_site_aniso_U_11
+_atom_site_aniso_U_22
+_atom_site_aniso_U_33
+_atom_site_aniso_U_12
+_atom_site_aniso_U_13
+_atom_site_aniso_U_23
+Ca 0.02900 0.02300 0.03600 0.00000 0.00000 -0.00040
+Sr 0.02900 0.02300 0.03600 0.00000 0.00000 -0.00040
+C 0.02600 0.03100 0.01300 0.00000 0.00000 -0.00700
+O1 0.04200 0.01900 0.04400 0.00000 0.00000 -0.00100
+O2 0.01800 0.03700 0.04800 0.00900 0.00100 0.00200
+loop_
+_atom_site_label
+_atom_site_fract_x
+_atom_site_fract_y
+_atom_site_fract_z
+_atom_site_occupancy
+_atom_site_U_iso_or_equiv
+Ca 0.25000 0.41482 0.75940 0.99700 0.02900
+Sr 0.25000 0.41482 0.75940 0.00300 0.02900
+C 0.25000 0.75880 -0.08190 1.00000 0.02300
+O1 0.25000 0.92070 -0.09210 1.00000 0.03500
+O2 0.47380 0.68090 -0.08380 1.00000 0.03400
+loop_
+_cod_related_entry_id
+_cod_related_entry_database
+_cod_related_entry_code
+1 AMCSD 0018856
