@@ -183,9 +183,15 @@ SMILES = {
     'hoat':        'On1nnc2cccnc21',
     'oxauracil':   'O=c1cc[nH]c(=O)o1',
     'hydroxyuracil': 'O=c1[nH]cc(O)c(=O)[nH]1',
+    # crystal-type test set (crystal_types.py)
+    'benzoic_acid': 'OC(=O)c1ccccc1',                             # acid dimers
+    'pyrene':      'c1cc2ccc3cccc4ccc(c1)c2c34',                  # π-stack
+    'coronene':    'c1cc2ccc3ccc4ccc5ccc6ccc1c1c2c3c4c5c61',      # π-stack
+    'glycine':     '[NH3+]CC(=O)[O-]',                            # zwitterion
     # larger molecules (multi-resolution tests); stereo from the COD files
     'progesterone': 'CC(=O)[C@H]1CC[C@H]2[C@@H]3CCC4=CC(=O)CC[C@]4(C)[C@H]3CC[C@]12C',
     'artemisinin': 'C[C@@H]1CC[C@H]2[C@@H](C)C(=O)O[C@@H]3O[C@@]4(C)CC[C@@H]1[C@]32OO4',
+    'uric_acid':   'O=C1NC(=O)C2=C(N1)NC(=O)N2',                  # 2,6,8-trioxo tautomer
 }
 
 
@@ -419,6 +425,13 @@ def has_forcefield(key: str) -> bool:
     return key in BUILDERS
 
 
+def smiles_of(key: str) -> str:
+    """SMILES of a built-in or user-added molecule (KeyError if it has none)."""
+    if key in SMILES:
+        return SMILES[key]
+    return USER_MOLECULES[key]['smiles']
+
+
 @lru_cache(maxsize=None)
 def get_ff_molecule(key: str) -> FFMolecule:
     return BUILDERS[key]()
@@ -553,15 +566,28 @@ class FFModel:
         # compiled pair kernel (kernels.py): one pass for energy + forces
         self.use_kernel = USE_KERNEL and ff.form in ('lj', 'mmff') and self.shape >= 1.0
         if self.use_kernel:
+            from kernels import half_pairs
             coul = 2 if self.dsf else (1 if self.charged else 0)
+            n = np.asarray(pairs[2], dtype=np.float64)
+            qq = self.qq.numpy() if self.charged else np.zeros(len(i))
+            weight = float(self.pair_weight)
+            if weight == 1.0:
+                # build_pairs lists every pair in both orders: keep one, count it twice
+                # (not for lattice._SymGeometry, whose list holds molecule 0's pairs only)
+                h = half_pairs(np.asarray(i), np.asarray(j), n)
+                weight = 2.0
+            else:
+                h = np.arange(len(i))
             self.kernel_spec = (
-                np.ascontiguousarray(i, dtype=np.int64), np.ascontiguousarray(j, dtype=np.int64),
-                np.ascontiguousarray(pairs[2], dtype=np.float64),
-                self.pa.numpy().astype(np.float64), self.pb.numpy().astype(np.float64),
-                self.qq.numpy().astype(np.float64) if self.charged else np.zeros(len(i)),
+                np.ascontiguousarray(np.asarray(i)[h], dtype=np.int64),
+                np.ascontiguousarray(np.asarray(j)[h], dtype=np.int64),
+                np.ascontiguousarray(n[h]),
+                np.ascontiguousarray(self.pa.numpy()[h], dtype=np.float64),
+                np.ascontiguousarray(self.pb.numpy()[h], dtype=np.float64),
+                np.ascontiguousarray(qq[h], dtype=np.float64),
                 ff.form == 'lj', lv['vdw_on'], lv['vdw_cut'], coul, lv['alpha'], CHARGE_WIDTH,
                 lv.get('dsf_cut', 0.0), getattr(self, 'dsf_shift', 0.0), getattr(self, 'dsf_force', 0.0),
-                COULOMB, float(self.pair_weight))
+                COULOMB, weight)
 
     def geometry(self, eps, dcom, rot):
         return self.base.geometry(eps, dcom, rot)

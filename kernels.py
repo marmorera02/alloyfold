@@ -21,38 +21,54 @@ from numba import njit
 SQRT_PI = math.sqrt(math.pi)
 
 
-@njit(cache=True, fastmath=False)
+# Floating-point relaxations that cannot change results beyond rounding.
+# 'nnan'/'ninf' are left out on purpose: a collapsed cell must still
+# produce inf/NaN so that lattice.minimise() can reject it.
+FASTMATH = {'contract', 'arcp', 'reassoc', 'nsz', 'afn'}
+
+
+@njit(cache=True, fastmath=FASTMATH)
 def _pair_kernel(pos, cell, I, J, N, R, EPS, QQ, form_lj, vdw_on, vdw_cut,
                  coul, alpha, width, rc, shift, force, coulomb, weight):
-    """Energy, dE/dpos (n,3), dE/dcell (3,3). coul: 0 none, 1 Ewald real, 2 DSF."""
+    """Energy, dE/dpos (n,3), dE/dcell (3,3). coul: 0 none, 1 Ewald real, 2 DSF.
+    Each listed pair contributes 0.5 * weight; FFModel passes a half list
+    (each unordered pair once) with the weight doubled."""
     n_at = pos.shape[0]
     gpos = np.zeros((n_at, 3))
     gcell = np.zeros((3, 3))
     energy = 0.0
     span = vdw_cut - vdw_on
+    r_smear = 6.0 * width       # erf(r/width) == 1.0 exactly in float64 beyond this
     for p in range(I.shape[0]):
         i, j = I[p], J[p]
-        dx = pos[j, 0] - pos[i, 0] + N[p, 0] * cell[0, 0] + N[p, 1] * cell[1, 0] + N[p, 2] * cell[2, 0]
-        dy = pos[j, 1] - pos[i, 1] + N[p, 0] * cell[0, 1] + N[p, 1] * cell[1, 1] + N[p, 2] * cell[2, 1]
-        dz = pos[j, 2] - pos[i, 2] + N[p, 0] * cell[0, 2] + N[p, 1] * cell[1, 2] + N[p, 2] * cell[2, 2]
-        r = math.sqrt(dx * dx + dy * dy + dz * dz)
+        n0, n1, n2 = N[p, 0], N[p, 1], N[p, 2]
+        dx = pos[j, 0] - pos[i, 0] + n0 * cell[0, 0] + n1 * cell[1, 0] + n2 * cell[2, 0]
+        dy = pos[j, 1] - pos[i, 1] + n0 * cell[0, 1] + n1 * cell[1, 1] + n2 * cell[2, 1]
+        dz = pos[j, 2] - pos[i, 2] + n0 * cell[0, 2] + n1 * cell[1, 2] + n2 * cell[2, 2]
+        r2 = dx * dx + dy * dy + dz * dz
+        r = math.sqrt(r2)
+        inv_r = 1.0 / r
         e = 0.0
         de = 0.0
         if r < vdw_cut and EPS[p] != 0.0:
             Rs = R[p]
             if form_lj:
-                sr6 = (Rs / r) ** 6
+                s2 = Rs * Rs / r2
+                sr6 = s2 * s2 * s2
                 ev = 4.0 * EPS[p] * (sr6 * sr6 - sr6)
-                dev = 4.0 * EPS[p] * (-12.0 * sr6 * sr6 + 6.0 * sr6) / r
+                dev = 4.0 * EPS[p] * (-12.0 * sr6 * sr6 + 6.0 * sr6) * inv_r
             else:
-                a = 1.07 * Rs / (r + 0.07 * Rs)
-                A = a ** 7
-                dA = -7.0 * A / (r + 0.07 * Rs)
-                R7 = Rs ** 7
-                r7 = r ** 7
-                den = r7 + 0.12 * R7
-                B = 1.12 * R7 / den - 2.0
-                dB = -1.12 * R7 * 7.0 * r ** 6 / (den * den)
+                ib = 1.0 / (r + 0.07 * Rs)
+                a = 1.07 * Rs * ib
+                a2 = a * a
+                A = a2 * a2 * a2 * a
+                dA = -7.0 * A * ib
+                R2 = Rs * Rs
+                R7 = R2 * R2 * R2 * Rs
+                r6 = r2 * r2 * r2
+                iden = 1.0 / (r6 * r + 0.12 * R7)
+                B = 1.12 * R7 * iden - 2.0
+                dB = -1.12 * R7 * 7.0 * r6 * iden * iden
                 ev = EPS[p] * A * B
                 dev = EPS[p] * (dA * B + A * dB)
             t = (r - vdw_on) / span
@@ -65,16 +81,21 @@ def _pair_kernel(pos, cell, I, J, N, R, EPS, QQ, form_lj, vdw_on, vdw_cut,
                 e += ev * sw
                 de += dev * sw + ev * dsw
         if coul > 0 and QQ[p] != 0.0 and (coul == 1 or r < rc):
-            f = (math.erf(r / width) - math.erf(alpha * r)) / r
-            df = (2.0 / SQRT_PI) * (math.exp(-(r / width) ** 2) / width
-                                    - alpha * math.exp(-(alpha * r) ** 2)) / r - f / r
+            ar = alpha * r
+            if r < r_smear:
+                f = (math.erf(r / width) - math.erf(ar)) * inv_r
+                df = (2.0 / SQRT_PI) * (math.exp(-(r / width) ** 2) / width
+                                        - alpha * math.exp(-ar * ar)) * inv_r - f * inv_r
+            else:               # smearing term is exactly 1 (value) and 0 (slope)
+                f = math.erfc(ar) * inv_r
+                df = -(2.0 / SQRT_PI) * alpha * math.exp(-ar * ar) * inv_r - f * inv_r
             if coul == 2:
                 f += -shift + force * (r - rc)
                 df += force
             e += coulomb * QQ[p] * f
             de += coulomb * QQ[p] * df
         energy += 0.5 * weight * e
-        g = 0.5 * weight * de / r
+        g = 0.5 * weight * de * inv_r
         gx, gy, gz = g * dx, g * dy, g * dz
         gpos[j, 0] += gx
         gpos[j, 1] += gy
@@ -82,11 +103,24 @@ def _pair_kernel(pos, cell, I, J, N, R, EPS, QQ, form_lj, vdw_on, vdw_cut,
         gpos[i, 0] -= gx
         gpos[i, 1] -= gy
         gpos[i, 2] -= gz
-        for a_ in range(3):
-            gcell[a_, 0] += N[p, a_] * gx
-            gcell[a_, 1] += N[p, a_] * gy
-            gcell[a_, 2] += N[p, a_] * gz
+        gcell[0, 0] += n0 * gx
+        gcell[0, 1] += n0 * gy
+        gcell[0, 2] += n0 * gz
+        gcell[1, 0] += n1 * gx
+        gcell[1, 1] += n1 * gy
+        gcell[1, 2] += n1 * gz
+        gcell[2, 0] += n2 * gx
+        gcell[2, 1] += n2 * gy
+        gcell[2, 2] += n2 * gz
     return energy, gpos, gcell
+
+
+def half_pairs(i, j, n):
+    """Indices of a list that holds every pair in both orders, (i, j, n) and
+    (j, i, -n), keeping each unordered pair once: i < j, or for an atom and
+    its own image (i == j) the shift that is lexicographically positive."""
+    pos_shift = (n[:, 0] > 0) | ((n[:, 0] == 0) & ((n[:, 1] > 0) | ((n[:, 1] == 0) & (n[:, 2] > 0))))
+    return np.flatnonzero((i < j) | ((i == j) & pos_shift))
 
 
 class PairEnergy(torch.autograd.Function):

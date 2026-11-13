@@ -9,3 +9,5 @@ psutil>=5.9
 # optional, only for the DFT re-ranking (dft_rank.py):
 # pyscf>=2.6
 # simple-dftd3 (python module "dftd3"; easiest via conda-forge)
+# optional, only for the ML re-ranking (--ml):
+# mace-torch>=0.3.10

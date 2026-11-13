@@ -353,11 +353,12 @@ def plane_spacing(cell: np.ndarray) -> float:
                for d in range(3))
 
 
-def _round(x: Crystal, pressure: float, max_iter: int) -> Crystal:
+def _round(x: Crystal, pressure: float, max_iter: int):
     """
-    One L-BFGS round on a fixed pair list. A trust region keeps it valid:
-    strain, translations and rotations are squashed (tanh) so that no pair
-    distance changes by more than ~3 × budget ≈ 2 Å per round. Unbounded,
+    One L-BFGS round on a fixed pair list. Returns (crystal, lattice energy
+    per molecule at its final geometry, on the round's own pair list).
+    A trust region keeps it valid: strain, translations and rotations are
+    squashed (tanh) so that no pair distance changes by more than ~3 × budget ≈ 2 Å per round. Unbounded,
     one long line-search step could bring atoms from beyond the list into
     contact (missing repulsion) and the cell collapsed unopposed. 2 Å is
     safe: a pair must travel ~10 Å from the list edge to reach contact,
@@ -380,6 +381,11 @@ def _round(x: Crystal, pressure: float, max_iter: int) -> Crystal:
         model = FFModel(_SymGeometry(x, pairs, maps), x, pairs)
     else:
         model = make_model(x, pairs)
+    import fastmin
+    if maps is None and fastmin.applicable(model):
+        # compiled L-BFGS round (fastmin.py): same steps, no PyTorch overhead
+        cell, com, off, e = fastmin.run_round(x, model, pressure, max_iter, s_max, budget, t_max)
+        return _reduce_and_wrap(replace(x, cell=cell, com=com, offset=off)), e
     n_free = 1 if maps is not None else x.z
     eps_r = torch.zeros(6, requires_grad=True)
     dcom_r = torch.zeros(n_free, 3, requires_grad=True)
@@ -405,10 +411,12 @@ def _round(x: Crystal, pressure: float, max_iter: int) -> Crystal:
 
     opt.step(closure)
     with torch.no_grad():
-        cell, com, off = model.geometry(*squash())
+        v = squash()
+        e = float(model(*v)) / x.z
+        cell, com, off = model.geometry(*v)
     return _reduce_and_wrap(replace(x, cell=cell.numpy().copy(),
                                     com=com.numpy().copy(),
-                                    offset=off.numpy().copy()))
+                                    offset=off.numpy().copy())), e
 
 
 def minimise(x: Crystal, max_rounds: int = 40, max_iter: int = 40,
@@ -438,12 +446,14 @@ def minimise(x: Crystal, max_rounds: int = 40, max_iter: int = 40,
         stage_end = rounds + MORPH_ROUNDS if shape < 1.0 else max_rounds
         while rounds < min(stage_end, max_rounds):
             rounds += 1
-            x = _round(x, pressure, max_iter)
+            x, e_round = _round(x, pressure, max_iter)
             if (not np.isfinite(x.volume) or x.volume > max_volume_factor * v0
                     or plane_spacing(x.cell) < MIN_SPACING):
                 failed = True
                 break
-            h = lattice_energy(x) + pressure * x.volume / x.z
+            # the round's own energy: a fresh lattice_energy() here rebuilt the
+            # pair list and model every round (convergence only needs differences)
+            h = e_round + pressure * x.volume / x.z
             if h_prev is not None and abs(h - h_prev) <= tol * max(1.0, abs(h)):
                 converged = pressure == 0.0
                 break

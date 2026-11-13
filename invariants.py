@@ -15,6 +15,7 @@
 
 import math
 import numpy as np
+from scipy.spatial import cKDTree
 
 from lattice import image_range
 
@@ -29,18 +30,20 @@ def amd(cell: np.ndarray, positions: np.ndarray, k: int = K_DEFAULT) -> np.ndarr
     r = (3 * (k + 1) / (4 * math.pi * n / vol)) ** (1 / 3) * 1.5 + 1.0
     T = image_range(cell, r) @ cell                       # (M,3)
     images = (pos[None, :, :] + T[:, None, :]).reshape(-1, 3)
-    out = np.zeros(k)
-    for p in pos:
-        d = np.linalg.norm(images - p, axis=1)
-        d = d[d > 1e-8]                                   # drop the atom itself
-        out += np.sort(np.partition(d, k - 1)[:k])       # k nearest, in order
-    return out / n
+    d, _ = cKDTree(images).query(pos, k + 1)             # nearest is the atom itself
+    return d[:, 1:].mean(axis=0)
 
 
 def amd_normalised(cell, positions, k: int = K_DEFAULT) -> np.ndarray:
     n = len(positions)
     scale = (abs(np.linalg.det(cell)) / n) ** (1 / 3)
     return amd(cell, positions, k) / scale
+
+
+def amd_distances(a: np.ndarray, many: np.ndarray) -> np.ndarray:
+    """amd_distance from a to every row of many (n, k), in one step."""
+    m = min(len(a), many.shape[1])
+    return np.max(np.abs(many[:, :m] - a[:m]), axis=1)
 
 
 def amd_distance(a: np.ndarray, b: np.ndarray) -> float:

@@ -63,7 +63,8 @@ X23 = {
     'pyrazole':     ('pyrazole', 'c1cn[nH]c1', 'pyrazole', 'C3 H4 N2', 'pyrazol', None, -77.3),
     'triazine':     ('s-triazine', 'c1ncncn1', 'triazine', 'C3 H3 N3', '', None, -60.5),
     'trioxane':     ('trioxane', 'C1OCOCO1', 'trioxane', 'C3 H6 O3', '', None, -62.1),
-    'uracil':       ('uracil', 'O=c1cc[nH]c(=O)[nH]1', 'uracil', 'C4 H4 N2 O2', '', None, -134.3),
+    # name filter: same formula as pyrazine N,N'-dioxide and maleic hydrazide (COD has no uracil itself)
+    'uracil':       ('uracil', 'O=c1cc[nH]c(=O)[nH]1', 'uracil', 'C4 H4 N2 O2', 'uracil|pyrimidine-2,4', None, -134.3),
     'urea':         ('urea', 'NC(N)=O', 'urea', 'C H4 N2 O', '', None, -108.5),
     'hexamine':     ('hexamine', 'C1N2CN3CN1CN(C2)C3', 'hexamethylenetetramine', 'C6 H12 N4', '', None, -86.2),
     'succinic_acid': ('succinic acid', 'OC(=O)CCC(=O)O', 'succinic acid', 'C4 H6 O4', 'succin|butanedioic', None, -125.2),
@@ -276,7 +277,31 @@ def x23_unit_cell(key):
     cell.set_cell(np.array(sc.cell) / n[:, None], scale_atoms=False)
     if int(np.prod(n)) * len(cell) != len(sc):
         raise ValueError(f'{key}: repeats {n.tolist()} do not divide the supercell')
+    if _volume_ok(key, cell):
+        return cell
+    # Some files are skewed supercells (axes are combinations of the cell's
+    # axes, e.g. uracil: 8 cells, no repeat along any file axis), so the cut
+    # above keeps the whole supercell. spglib finds the true lattice instead.
+    cell = _conventional_cell(sc)
+    if not _volume_ok(key, cell):
+        raise ValueError(f'{key}: no unit cell with the X23b volume {X23B[key][1]} Å³ found '
+                         f'(got {cell.get_volume():.1f} Å³)')
     return cell
+
+
+def _volume_ok(key, atoms, tol=0.06):
+    """Cell volume matches the X23b experimental cell (Dolgonos et al. 2019)."""
+    return abs(atoms.get_volume() / X23B[key][1] - 1) < tol
+
+
+def _conventional_cell(sc, symprec=0.05):
+    """Conventional unit cell (spglib), atoms kept where they are (no idealising)."""
+    import spglib
+    from ase import Atoms
+    lat, frac, nums = spglib.standardize_cell(
+        (np.array(sc.cell), sc.get_scaled_positions(), sc.get_atomic_numbers()),
+        to_primitive=False, no_idealize=True, symprec=symprec)
+    return Atoms(numbers=nums, scaled_positions=frac, cell=lat, pbc=True)
 
 
 def _evaluate(args):

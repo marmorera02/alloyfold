@@ -30,14 +30,22 @@ from lattice import (Crystal, build_pairs, model_cutoff, _rodrigues, _reduce_and
 DELTA_BUDGET = 0.25      # Å: max atom displacement within its molecule per round
 
 
-@lru_cache(maxsize=None)
 def _mmff(key):
     """RDKit MMFF force field (atom order of forcefield._from_smiles) and the
-    gas-phase minimum energy (kJ/mol) that conformer energies refer to."""
+    gas-phase minimum energy (kJ/mol) that conformer energies refer to.
+    Works for built-in and user-added molecules (forcefield.smiles_of)."""
+    from forcefield import smiles_of
+    return _mmff_for(key, smiles_of(key))
+
+
+@lru_cache(maxsize=None)
+def _mmff_for(key, smiles):
+    # cached per SMILES too: a user molecule re-registered under the same
+    # key must not reuse the old force field in a long-running process
     from rdkit import Chem
     from rdkit.Chem import AllChem
-    from forcefield import SMILES, KCAL, get_ff_molecule
-    mol = Chem.AddHs(Chem.MolFromSmiles(SMILES[key]))
+    from forcefield import KCAL, get_ff_molecule
+    mol = Chem.AddHs(Chem.MolFromSmiles(smiles))
     AllChem.EmbedMolecule(mol, randomSeed=7)
     ff = AllChem.MMFFGetMoleculeForceField(mol, AllChem.MMFFGetMoleculeProperties(mol))
     c0 = get_ff_molecule(key).conformer(0)[0]       # lowest conformer: e_conf = 0

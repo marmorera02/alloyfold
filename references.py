@@ -38,8 +38,13 @@ COD_REFERENCES = {
     'hoat':        [('form I', 2100524, None), ('form II', 2100525, None)],
     'oxauracil':   [('form I', 7216063, None)],
     'hydroxyuracil': [('form I', 7216065, None)],
+    'benzoic_acid': [('form I', 7252065, 298)],
+    'pyrene':      [('stacked form', 2100607, 298)],
+    'coronene':    [('β form', 4516530, 100)],
+    'glycine':     [('α form', 1556577, 103)],
     'progesterone': [('form I', 4511761, 110), ('racemic, CSP-predicted', 7101588, 150)],
     'artemisinin': [('form I', 1563559, 100)],
+    'uric_acid':   [('anhydrous (uricite)', 9011061, None)],
 }
 
 

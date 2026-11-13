@@ -81,14 +81,7 @@
  },
  "triazine": null,
  "trioxane": null,
- "uracil": {
-  "cod": 7203098,
-  "sg": "P 1 21/c 1",
-  "T": "293",
-  "year": "2007",
-  "name": "Pyrazine-N,N'-dioxide",
-  "method": "formula+sg+volume"
- },
+ "uracil": null,
  "urea": {
   "cod": 9017318,
   "sg": "P -4 21 m",
@@ -106,4 +99,4 @@
   "name": "1,4-Butanedioic acid",
   "method": "formula+sg+volume"
  }
-}
+}

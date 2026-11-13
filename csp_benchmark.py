@@ -60,10 +60,17 @@ from references import COD_REFERENCES, experimental_crystal
 from spacegroups import operations
 from lattice import cell_from_params, primitive_cell
 from invariants import amd_normalised, amd_distance
+from x23 import X23 as _X23, X23B as _X23B
 
 MATCH_TOL = 0.05        # normalised AMD distance for "same structure"
 CELL_TOL = 0.07         # reduced-cell length tolerance (force fields ±5% density)
 SUCCESS_DE = 2.0        # kJ/mol — experimental form within this of #1
+ADAPTIVE_MAX = 5000      # upper limit of starts with --adaptive
+EXP_MATCH_TOL = 0.005   # normalised AMD: experimental form (re-minimised) = found structure.
+                        # True matches lie at 0.0000-0.0002, different structures from ~0.01
+                        # (CHANGES_JD.md section 7); the old DEDUP_TOL (0.02) counted misses as found.
+ML_SUCCESS_TOP = 10     # with --ml: found by the search AND within the ML's top 10, i.e.
+                        # among the structures that would go on to DFT (dft_rank.py --ml)
 RESULTS_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                             'benchmark_results.jsonl')
 LANDSCAPES = os.path.join(os.path.dirname(os.path.abspath(__file__)),
@@ -146,6 +153,16 @@ REFERENCES = {
         ('hydantoin', 1.669, 400), ('acrolein', 1.152, 400), ('dbcfb', 2.528, 400),
         ('bt6_xxii', 1.727, 400), ('hoat', 1.616, 400), ('oxauracil', 1.717, 400),
         ('hydroxyuracil', 1.803, 400), ('bt4_thione', 1.479, 800), ('bt3_x', 1.528, 800)]},
+    # larger molecules with a COD structure (references.COD_REFERENCES); density
+    # from the experimental structure
+    **{k: dict(name=f'{k} (COD)', ref=None, cell=None, sg=None, density=None,
+               e_exp=None, n=1500) for k in ('progesterone', 'artemisinin', 'uric_acid',
+                                             'benzoic_acid', 'pyrene', 'coronene', 'glycine')},
+    # X23 crystals not listed above: matched against the X23 experimental
+    # structure (x23.py, MolCrys-MACE files); lattice energy = X23b reference
+    **{k: dict(name=f'{k} (X23)', ref=None, cell=None, sg=None, density=None,
+               e_exp=_X23B[k][0], n=1500, x23=True)
+       for k in _X23 if k not in ('acetic_acid', 'anthracene', 'benzene', 'CO2', 'naphthalene')},
 }
 
 
@@ -173,9 +190,11 @@ def _fingerprint(structure, only=None):
 
 
 def evaluate(key: str, n: int = None, workers: int = None,
-             physical: bool = True, rematch: bool = False) -> dict:
+             physical: bool = True, rematch: bool = False, ml: str = None,
+             adaptive: bool = False) -> dict:
     spec = REFERENCES[key]
-    n = n or spec['n']
+    n = n or (ADAPTIVE_MAX if adaptive else spec['n'])
+    sampling = {}
     t0 = time.time()
     path = os.path.join(LANDSCAPES, f'{key}.pkl')
     if rematch:                       # re-score a saved landscape, no search
@@ -183,14 +202,19 @@ def evaluate(key: str, n: int = None, workers: int = None,
             n, unique = pickle.load(f)
     else:
         unique = run_csp(key, n_candidates=n, workers=workers, verbose=False,
-                         physical=physical)
+                         physical=physical, adaptive=adaptive)
+        import csp
+        if adaptive and csp.LAST_RUN:
+            sampling = {'max_starts': n, 'new_per_batch': csp.LAST_RUN['new_per_batch'],
+                        'saturated': csp.LAST_RUN['saturated']}
+            n = csp.LAST_RUN['starts']
         if physical:
             os.makedirs(LANDSCAPES, exist_ok=True)
             with open(path, 'wb') as f:
                 pickle.dump((n, unique), f)
     out = {'material': key, 'reference': spec['name'], 'candidates': n,
            'unique': len(unique), 'seconds': round(time.time() - t0, 1),
-           'physics': 'forcefield' if physical else 'toy',
+           'physics': 'forcefield' if physical else 'toy', **sampling,
            'rank': None, 'dE': None, 'E_ratio': None, 'density_ratio': None,
            'top1': unique[0].space_group if unique else None,
            'top1_E': round(unique[0].energy, 2) if unique else None,
@@ -198,24 +222,50 @@ def evaluate(key: str, n: int = None, workers: int = None,
     if not unique:
         return out
     e_min = unique[0].energy
-    if physical and key in COD_REFERENCES:
-        # Experimental form (COD) rebuilt with the FF's own molecule and
+    ref_density = spec['density']
+    if physical and (key in COD_REFERENCES or spec.get('x23')):
+        # Experimental form (COD or X23) rebuilt with the FF's own molecule and
         # minimised: matching two minima of the same model is unambiguous,
         # and its energy shows where the FF ranks it even if the search
         # missed it (ff_dE < 0: something better than anything found).
-        label, cod_id, _ = COD_REFERENCES[key][0]
-        y = _finish(minimise(experimental_crystal(key, cod_id)))
+        if spec.get('x23'):
+            from x23 import x23_unit_cell
+            label, cod_id = 'X23', None
+            x_exp = experimental_crystal(key, atoms=x23_unit_cell(key))
+        else:
+            label, cod_id, _ = COD_REFERENCES[key][0]
+            x_exp = experimental_crystal(key, cod_id)
+        ref_density = ref_density or x_exp.density
+        y = y_rigid = _finish(minimise(x_exp))
         if y is not None and unique[0].crystal.meta.get('flex') == 'ok':
             y = _polish(y) or y            # same flexible polish as the landscape
         if y is not None:
-            fp = amd_normalised(y.cell, y.positions)
-            dists = [amd_distance(fp, s.amd) for s in unique]
+            # only the lowest structures are polished (csp.FLEX_*), so a real form
+            # found further down is unpolished: match either version
+            fps = [amd_normalised(c.cell, c.positions) for c in {id(y): y, id(y_rigid): y_rigid}.values()]
+            dists = [min(amd_distance(fp, s.amd) for fp in fps) for s in unique]
             out['closest_amd'] = round(min(dists), 4)
+            # energy check: does the real crystal stay put when minimised with
+            # the FF? (large drift = the FF does not hold it, search cannot help)
+            fp_exp = amd_normalised(x_exp.cell, x_exp.positions)
+            out['exp_drift'] = round(min(amd_distance(fp_exp, fp) for fp in fps), 4)
             out['ff_rank'] = 1 + sum(s.energy < y.energy - 0.05 for s in unique)
             out['ff_dE'] = round(y.energy - e_min, 3)
             out['ref_E'] = round(y.energy, 2)
-            out['reference'] = f'{spec["name"].split(" (")[0]} {label} (COD {cod_id})'
-            hits = [k for k, d in enumerate(dists) if d < DEDUP_TOL]
+            out['reference'] = (f'{spec["name"].split(" (")[0]} {label}'
+                                + (f' (COD {cod_id})' if cod_id else ''))
+            hits = [k for k, d in enumerate(dists) if d < EXP_MATCH_TOL]
+            if ml:
+                # three-step funnel check: where does the ML potential put the real form
+                # among the force field's best (same cell-scale walk for all)?
+                from mlrank import rerank, relaxed_energy, cache_path, ML_TOP
+                rerank(unique, ml, ML_TOP, cache=cache_path(key, ml), verbose=False)
+                e_ml, _ = relaxed_energy(y, ml)
+                scored = [s.ml_energy for s in unique if s.ml_energy is not None]
+                out['ml_model'] = ml
+                out['ml_rank'] = 1 + sum(e < e_ml - 0.05 for e in scored)
+                out['ml_dE'] = round(e_ml - min(scored + [e_ml]), 3)
+                out['ml_of'] = len(scored)
         else:
             hits = []
     elif spec['ref'] is not None:
@@ -236,7 +286,8 @@ def evaluate(key: str, n: int = None, workers: int = None,
         out['E'] = round(unique[k].energy, 2)
         if physical and spec.get('e_exp'):
             out['E_ratio'] = round(unique[k].energy / spec['e_exp'], 3)
-        out['density_ratio'] = round(unique[k].crystal.density / spec['density'], 3)
+        if ref_density:
+            out['density_ratio'] = round(unique[k].crystal.density / ref_density, 3)
     return out
 
 
@@ -249,6 +300,10 @@ def main():
     ap.add_argument('--toy', action='store_true', help='old unit-less physics')
     ap.add_argument('--rematch', action='store_true',
                     help='re-score the saved landscapes (no new search)')
+    ap.add_argument('--adaptive', action='store_true',
+                    help=f'batches of 500 starts until one brings nothing new (at most --n, default {ADAPTIVE_MAX})')
+    ap.add_argument('--ml', default=None, choices=['mpa0', 'omol', 'off23'],
+                    help='also rank the real form with a machine-learned potential (mlrank.py)')
     a = ap.parse_args()
 
     stamp = datetime.datetime.now().isoformat(timespec='seconds')
@@ -259,7 +314,8 @@ def main():
           f'{"predicted #1":<16} time')
     rows = []
     for key in a.materials:
-        r = evaluate(key, a.n, a.workers, physical=not a.toy, rematch=a.rematch)
+        r = evaluate(key, a.n, a.workers, physical=not a.toy, rematch=a.rematch, ml=a.ml,
+                     adaptive=a.adaptive)
         if a.rematch:
             r['rematched'] = True
         r['timestamp'] = stamp
@@ -270,7 +326,11 @@ def main():
               f'{fmt(r.get("closest_amd"), ">6.3f")}  '
               f'{str(r["top1"]):<16} {r["seconds"]:.0f}s'
               + (f'  | FF ranks real form {r["ff_rank"]} (ΔE {r["ff_dE"]:+.2f})'
-                 if r.get('ff_rank') else ''), flush=True)
+                 if r.get('ff_rank') else '')
+              + (f'  | ML ({r["ml_model"]}) ranks it {r["ml_rank"]}/{r["ml_of"]} (ΔE {r["ml_dE"]:+.2f})'
+                 if r.get('ml_rank') else '')
+              + (f'  | {"saturated" if r["saturated"] else "hit the limit"}, new per batch {r["new_per_batch"]}'
+                 if 'saturated' in r else ''), flush=True)
     with open(RESULTS_FILE, 'a', encoding='utf-8') as f:
         for r in rows:
             f.write(json.dumps(r) + '\n')
@@ -279,6 +339,13 @@ def main():
     ok = sum(r['dE'] is not None and r['dE'] <= SUCCESS_DE for r in rows)
     print(f'\nfound {found}/{len(rows)}, ranked #1 {top1}/{len(rows)}, '
           f'within {SUCCESS_DE:g} kJ/mol of #1 {ok}/{len(rows)}  → {RESULTS_FILE}')
+    if a.ml:
+        # a real form the search did not find gets an ML rank too (rebuilt from
+        # the experimental structure), so it must also have been found (rank)
+        passed = [r['material'] for r in rows if r['rank'] is not None
+                  and r.get('ml_rank') is not None and r['ml_rank'] <= ML_SUCCESS_TOP]
+        print(f'generator test ({a.ml}): found AND in the ML top {ML_SUCCESS_TOP} '
+              f'(would reach DFT) {len(passed)}/{len(rows)}: {", ".join(passed) or "-"}')
 
 
 if __name__ == '__main__':

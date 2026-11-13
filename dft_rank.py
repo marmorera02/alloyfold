@@ -117,24 +117,39 @@ def volume_scan(x, basis='gth-dzvp', ke_cutoff=KE_CUTOFF, step=0.02, max_points=
         if f not in pts:
             pts[f] = energy_per_molecule(scaled(x, f), basis, ke_cutoff)
         return pts[f]['E_kJ_per_mol']
-    d = -step if e(1.0 - step) < e(1.0) else step
-    f = 1.0 + d if d < 0 else 1.0
-    while len(pts) < max_points:
-        nxt = round(f + d, 4)
-        if e(nxt) >= e(f):
-            break
-        f = nxt
-    fs = sorted(pts, key=lambda k: pts[k]['E_kJ_per_mol'])[:3]
-    es = [pts[k]['E_kJ_per_mol'] for k in fs]
-    a, b, c = np.polyfit(fs, es, 2)
-    f_min = -b / (2 * a) if a > 0 else fs[0]
-    f_min = float(np.clip(f_min, min(fs), max(fs)))
+    e_min, f_min, fs = scan_scale(e, step, max_points)
     best = dict(pts[fs[0]])
-    best.update({'E_kJ_per_mol': float(np.polyval([a, b, c], f_min)) if a > 0 else es[0],
+    best.update({'E_kJ_per_mol': e_min,
                  'scale': f_min, 'V_over_ff': f_min ** 3,
                  'scan': {str(k): v['E_kJ_per_mol'] for k, v in sorted(pts.items())},
                  'seconds': sum(v['seconds'] for v in pts.values())})
     return best
+
+
+def scan_scale(e, step=0.02, max_points=7):
+    """
+    Walk downhill in the linear cell scale from 1.0 (e(f) = energy per
+    molecule at scale f, cached by the caller), then fit a parabola through
+    the three lowest points. Returns (E at the minimum, scale at the minimum,
+    evaluated scales sorted by energy). Shared by the DFT and ML re-ranking.
+    """
+    seen = set()
+    def ev(f):
+        seen.add(f)
+        return e(f)
+    d = -step if ev(1.0 - step) < ev(1.0) else step
+    f = 1.0 + d if d < 0 else 1.0
+    while len(seen) < max_points:
+        nxt = round(f + d, 4)
+        if ev(nxt) >= ev(f):
+            break
+        f = nxt
+    fs = sorted(seen, key=e)[:3]
+    es = [e(k) for k in fs]
+    a, b, c = np.polyfit(fs, es, 2)
+    f_min = -b / (2 * a) if a > 0 else fs[0]
+    f_min = float(np.clip(f_min, min(fs), max(fs)))
+    return (float(np.polyval([a, b, c], f_min)) if a > 0 else es[0]), f_min, fs
 
 
 def main():
@@ -146,7 +161,12 @@ def main():
     ap.add_argument('material')
     ap.add_argument('--window', type=float, default=15.0,
                     help='re-rank every candidate within this many kJ/mol of the FF minimum')
-    ap.add_argument('--max', type=int, default=40, help='cap on re-ranked candidates')
+    ap.add_argument('--max', type=int, default=None,
+                    help='cap on re-ranked candidates (default 40; 10 with --ml)')
+    ap.add_argument('--ml', default=None, choices=['mpa0', 'omol', 'off23'],
+                    help='pick the candidates by a machine-learned potential (mlrank.py) '
+                         'instead of the force field: the --max best of its --ml-top re-ranked')
+    ap.add_argument('--ml-top', type=int, default=250, help='structures re-ranked by the ML potential')
     ap.add_argument('--scan', type=int, default=N_SCAN, help='finalists given the full volume scan')
     ap.add_argument('--basis', default='gth-dzvp')
     ap.add_argument('--ke', type=float, default=KE_CUTOFF, help='kinetic cutoff (Hartree)')
@@ -157,8 +177,21 @@ def main():
     # blind rule: everything the FF puts within the window (the real form was
     # FF rank 28 at +14.5 kJ/mol for 5-hydroxyuracil); experimental forms are
     # added only as a check, labelled as such
-    jobs = [(f'FF #{k + 1}', s.crystal, s.energy) for k, s in enumerate(unique[:a.max])
-            if s.energy <= unique[0].energy + a.window]
+    if a.max is None:
+        a.max = 10 if a.ml else 40
+    if a.ml:
+        # three-step funnel: FF landscape → ML re-ranking → DFT for the ML's best.
+        # Labels stay "FF #k" (force-field rank), so earlier DFT results are reused.
+        from mlrank import rerank, cache_path
+        rerank(unique, a.ml, a.ml_top, cache=cache_path(a.material, a.ml))
+        order = sorted(range(min(a.ml_top, len(unique))), key=lambda k: unique[k].ml_energy)
+        jobs = [(f'FF #{k + 1}', unique[k].crystal, unique[k].energy) for k in order[:a.max]]
+        ml_rank = {f'FF #{k + 1}': r + 1 for r, k in enumerate(order)}
+        print('ML picks: ' + ', '.join(f'FF #{k + 1}' for k in order[:a.max]), flush=True)
+    else:
+        jobs = [(f'FF #{k + 1}', s.crystal, s.energy) for k, s in enumerate(unique[:a.max])
+                if s.energy <= unique[0].energy + a.window]
+        ml_rank = {}
     for label, cod_id, _ in COD_REFERENCES.get(a.material, []):
         y = _finish(minimise(experimental_crystal(a.material, cod_id)))
         if unique[0].crystal.meta.get('flex') == 'ok':
@@ -216,7 +249,10 @@ def main():
         f0 = min(v['E_ff'] for v, _ in final.values())
         print('\nre-ranked (kJ/mol relative to the lowest; * = single point only):')
         for v, scanned in sorted(final.values(), key=lambda t: t[0]['E_kJ_per_mol']):
-            print(f'  DFT {v["E_kJ_per_mol"] - e0:6.2f}{" " if scanned else "*"}  FF {v["E_ff"] - f0:6.2f}   {v["name"]}')
+            ml = (f'  ML rank {ml_rank[v["name"]]:>3}' if v['name'] in ml_rank
+                  else ('  ML rank   -' if ml_rank else ''))
+            print(f'  DFT {v["E_kJ_per_mol"] - e0:6.2f}{" " if scanned else "*"}  FF {v["E_ff"] - f0:6.2f}'
+                  f'{ml}   {v["name"]}')
 
 
 if __name__ == '__main__':
